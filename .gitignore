@@ -101,6 +101,10 @@ ENV/
 .mypy_cache/
 
 #other stuff
-data/
-output/
-.snakemake
+data
+output
+*.snakemake
+*slurm_logs
+*.log
+slurm-*
+references
