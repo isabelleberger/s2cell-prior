@@ -1,7 +1,7 @@
 # sampletable: TSV file defining sample metadata.
 #
 # First column must have header name "samplename".
-sampletable: 'config/sampletable.tsv'
+sampletable: 'config/sampletable_test.tsv'
 
 # sample_dir: directory in which each sample is expected to have its own
 # directory and fastq file[s]. If `sampletable` lists a sample with samplename
@@ -48,137 +48,6 @@ chipseq:
   # at least a BED file of peaks.
   #
   peak_calling:
-  - label: WT-H3K27ac-1
-    algorithm: macs2
-    ip:
-    - WT-H3K27ac-1
-    control:
-    - WT-input-1
-    extra: '-g dm --bdg --broad --slocal 5000'
-
-  - label: WT-H3K27ac-2
-    algorithm: macs2
-    ip:
-    - WT-H3K27ac-2
-    control:
-    - WT-input-2
-    extra: '-g dm --bdg --broad --slocal 5000'
-
-  - label: WT-H3K27me3-4
-    algorithm: macs2
-    ip:
-    - WT-H3K27me3-4
-    control:
-    - WT-input-4
-    extra: '-g dm --bdg --broad --slocal 5000'
-
-  - label: WT-H3K4me1-1
-    algorithm: macs2
-    ip:
-    - WT-H3K4me1-1
-    control:
-    - WT-input-1
-    extra: '-g dm --bdg --broad --slocal 5000'
-
-  - label: WT-H3K4me1-4
-    algorithm: macs2
-    ip:
-    - WT-H3K4me1-4
-    control:
-    - WT-input-4
-    extra: '-g dm --bdg --broad --slocal 5000'
-  - label: trr-H327ac-1
-    algorithm: macs2
-    ip:
-    - trr-H327ac-1
-    control:
-    - trr-input-1
-    extra: '-g dm --bdg --broad --slocal 5000'
-  - label: trr-H327ac-2
-    algorithm: macs2
-    ip:
-    - trr-H327ac-2
-    control:
-    - trr-input-2
-    extra: '-g dm --bdg --broad --slocal 5000'
-  - label: trr-H3K27me3-4
-    algorithm: macs2
-    ip:
-    - trr-H3K27me3-4
-    control:
-    - trr-input-4
-    extra: '-g dm --bdg --broad --slocal 5000'
-  - label: trr-H3K4me1-1
-    algorithm: macs2
-    ip:
-    - trr-H3K4me1-1
-    control:
-    - trr-input-1
-    extra: '-g dm --bdg --broad --slocal 5000'
-  - label: trr-H3K4me1-4
-    algorithm: macs2
-    ip:
-    - trr-H3K4me1-4
-    control:
-    - trr-input-4
-    extra: '-g dm --bdg --broad --slocal 5000'
-  - label: LPT-H3K27me3-4
-    algorithm: macs2
-    ip:
-    - LPT-H3K27me3-4
-    control:
-    - LPT-input-4
-    extra: '-g dm --bdg --broad --slocal 5000'
-  - label: LPT-H3K4me1-4
-    algorithm: macs2
-    ip:
-    - LPT-H3K4me1-4
-    control:
-    - LPT-input-4
-    extra: '-g dm --bdg --broad --slocal 5000'
-  - label: p0-H3K27me3
-    algorithm: macs2
-    ip:
-    - p0-H3K27me3
-    control:
-    - p0-input
-    extra: '-g dm --bdg --broad --slocal 5000'
-  - label: p500-H3K27me3
-    algorithm: macs2
-    ip:
-    - p500-H3K27me3
-    control:
-    - p500-input
-    extra: '-g dm --bdg --broad --slocal 5000'
-  - label: p1000-H3K27me3
-    algorithm: macs2
-    ip:
-    - p1000-H3K27me3
-    control:
-    - p1000-input
-    extra: '-g dm --bdg --broad --slocal 5000'
-
-  - label: p0-H3K27me3-q
-    algorithm: macs2
-    ip:
-    - p0-H3K27me3-q
-    control:
-    - p0-input
-    extra: '-g dm --bdg --broad --slocal 5000'
-  - label: p500-H3K27me3-q
-    algorithm: macs2
-    ip:
-    - p500-H3K27me3-q
-    control:
-    - p500-input
-    extra: '-g dm --bdg --broad --slocal 5000'
-  - label: p1000-H3K27me3-q
-    algorithm: macs2
-    ip:
-    - p1000-H3K27me3-q
-    control:
-    - p1000-input
-    extra: '-g dm --bdg --broad --slocal 5000'
   - label: chip-rep1
     algorithm: spp
     ip:
@@ -197,12 +66,103 @@ chipseq:
     extra:
       fdr: 0.001
 
-  - label: SRX046653
+  - label: SRX191913
     algorithm: macs2
     ip:
-    - SRX046653
+    - SRX191913
     control:
-    - SRX046652
+    - SRX191915
+    extra: '-g dm --bdg --broad --slocal 5000'
+  - label: SRX191914
+    algorithm: macs2
+    ip:
+    - SRX191914
+    control:
+    - SRX191916
+    extra: '-g dm --bdg --broad --slocal 5000'
+  - label: SRX193318
+    algorithm: macs2
+    ip:
+    - SRX193318
+    control:
+    - SRX193308
+    extra: '-g dm --bdg --broad --slocal 5000'
+  - label: SRX193319
+    algorithm: macs2
+    ip:
+    - SRX193319
+    control:
+    - SRX193309
+    extra: '-g dm --bdg --broad --slocal 5000'
+  - label: SRX193320
+    algorithm: macs2
+    ip:
+    - SRX193320
+    control:
+    - SRX193311
+    extra: '-g dm --bdg --broad --slocal 5000'
+  - label: SRX193321
+    algorithm: macs2
+    ip:
+    - SRX193321
+    control:
+    - SRX193308
+    extra: '-g dm --bdg --broad --slocal 5000'
+  - label: SRX193322
+    algorithm: macs2
+    ip:
+    - SRX193322
+    control:
+    - SRX193311
+    extra: '-g dm --bdg --broad --slocal 5000'
+  - label: SRX193323
+    algorithm: macs2
+    ip:
+    - SRX193323
+    control:
+    - SRX193312
+    extra: '-g dm --bdg --broad --slocal 5000'
+  - label: SRX193324
+    algorithm: macs2
+    ip:
+    - SRX193324
+    control:
+    - SRX193313
+    extra: '-g dm --bdg --broad --slocal 5000'
+  - label: SRX193332
+    algorithm: macs2
+    ip:
+    - SRX193332
+    control:
+    - SRX193325
+    extra: '-g dm --bdg --broad --slocal 5000'
+  - label: SRX193333
+    algorithm: macs2
+    ip:
+    - SRX193333
+    control:
+    - SRX193326
+    extra: '-g dm --bdg --broad --slocal 5000'
+  - label: SRX193334
+    algorithm: macs2
+    ip:
+    - SRX193334
+    control:
+    - SRX193328
+    extra: '-g dm --bdg --broad --slocal 5000'
+  - label: SRX193335
+    algorithm: macs2
+    ip:
+    - SRX193335
+    control:
+    - SRX193325
+    extra: '-g dm --bdg --broad --slocal 5000'
+  - label: SRX193336
+    algorithm: macs2
+    ip:
+    - SRX193336
+    control:
+    - SRX193328
     extra: '-g dm --bdg --broad --slocal 5000'
 aligner:
   index: 'bowtie2'
