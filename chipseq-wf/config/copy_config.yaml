@@ -1,8 +1,7 @@
-
 # sampletable: TSV file defining sample metadata.
 #
 # First column must have header name "samplename".
-sampletable: 'config/sampletable.tsv'
+sampletable: 'config/sampletable_test.tsv'
 
 # sample_dir: directory in which each sample is expected to have its own
 # directory and fastq file[s]. If `sampletable` lists a sample with samplename
@@ -52,21 +51,119 @@ chipseq:
   - label: chip-rep1
     algorithm: spp
     ip:
-      - chip-rep1
+    - chip-rep1
     control:
-      - input-rep1
+    - input-rep1
     extra:
       fdr: 0.001
 
   - label: chip-rep2
     algorithm: spp
     ip:
-      - chip-rep2
+    - chip-rep2
     control:
-      - input-rep2
+    - input-rep2
     extra:
       fdr: 0.001
 
+  - label: SRX191913
+    algorithm: macs2
+    ip:
+    - SRX191913
+    control:
+    - SRX191915
+    extra: '-g dm --bdg --broad --slocal 5000'
+  - label: SRX191914
+    algorithm: macs2
+    ip:
+    - SRX191914
+    control:
+    - SRX191916
+    extra: '-g dm --bdg --broad --slocal 5000'
+  - label: SRX193318
+    algorithm: macs2
+    ip:
+    - SRX193318
+    control:
+    - SRX193308
+    extra: '-g dm --bdg --broad --slocal 5000'
+  - label: SRX193319
+    algorithm: macs2
+    ip:
+    - SRX193319
+    control:
+    - SRX193309
+    extra: '-g dm --bdg --broad --slocal 5000'
+  - label: SRX193320
+    algorithm: macs2
+    ip:
+    - SRX193320
+    control:
+    - SRX193311
+    extra: '-g dm --bdg --broad --slocal 5000'
+  - label: SRX193321
+    algorithm: macs2
+    ip:
+    - SRX193321
+    control:
+    - SRX193308
+    extra: '-g dm --bdg --broad --slocal 5000'
+  - label: SRX193322
+    algorithm: macs2
+    ip:
+    - SRX193322
+    control:
+    - SRX193311
+    extra: '-g dm --bdg --broad --slocal 5000'
+  - label: SRX193323
+    algorithm: macs2
+    ip:
+    - SRX193323
+    control:
+    - SRX193312
+    extra: '-g dm --bdg --broad --slocal 5000'
+  - label: SRX193324
+    algorithm: macs2
+    ip:
+    - SRX193324
+    control:
+    - SRX193313
+    extra: '-g dm --bdg --broad --slocal 5000'
+  - label: SRX193332
+    algorithm: macs2
+    ip:
+    - SRX193332
+    control:
+    - SRX193325
+    extra: '-g dm --bdg --broad --slocal 5000'
+  - label: SRX193333
+    algorithm: macs2
+    ip:
+    - SRX193333
+    control:
+    - SRX193326
+    extra: '-g dm --bdg --broad --slocal 5000'
+  - label: SRX193334
+    algorithm: macs2
+    ip:
+    - SRX193334
+    control:
+    - SRX193328
+    extra: '-g dm --bdg --broad --slocal 5000'
+  - label: SRX193335
+    algorithm: macs2
+    ip:
+    - SRX193335
+    control:
+    - SRX193325
+    extra: '-g dm --bdg --broad --slocal 5000'
+  - label: SRX193336
+    algorithm: macs2
+    ip:
+    - SRX193336
+    control:
+    - SRX193328
+    extra: '-g dm --bdg --broad --slocal 5000'
 aligner:
   index: 'bowtie2'
   tag: 'r6-16'
@@ -90,29 +187,29 @@ references:
         url: "https://raw.githubusercontent.com/lcdb/lcdb-test-data/add-chipseq/data/seq/dm6.small.fa"
         postprocess: 'lib.common.gzipped'
         indexes:
-          - 'bowtie2'   
+        - 'bowtie2'
     r6-16:
       gtf:
         url: 'ftp://ftp.flybase.net/genomes/Drosophila_melanogaster/dmel_r6.16_FB2017_03/gtf/dmel-all-r6.16.gtf.gz'
         postprocess: "lib.postprocess.dm6.gtf_postprocess"
         conversions:
-          - 'refflat'
-          - gffutils: # kwargs below will be provided to `gffutils.create_db`
-              merge_strategy: 'merge'
-              id_spec:
-                  transcript: ['transcript_id', 'transcript_symbol']
-                  gene: ['gene_id', 'gene_symbol']
-              gtf_transcript_key: 'transcript_id'
-              gtf_gene_key: 'gene_id'
-              disable_infer_genes: True
+        - 'refflat'
+        - gffutils:   # kwargs below will be provided to `gffutils.create_db`
+            merge_strategy: 'merge'
+            id_spec:
+              transcript: ['transcript_id', 'transcript_symbol']
+              gene: ['gene_id', 'gene_symbol']
+            gtf_transcript_key: 'transcript_id'
+            gtf_gene_key: 'gene_id'
+            disable_infer_genes: true
 
           # the attribute from the GTF to consider gene ID
-          - genelist:
-              gene_id: 'gene_id'
+        - genelist:
+            gene_id: 'gene_id'
 
-          - annotation_hub:
-              ahkey: 'AH49581'
-              keytype: 'ENSEMBL'
+        - annotation_hub:
+            ahkey: 'AH49581'
+            keytype: 'ENSEMBL'
 
       fb_annotation:
         url: 'ftp://ftp.flybase.net/releases/FB2017_03/precomputed_files/genes/fbgn_annotation_ID.tsv.gz'
@@ -126,12 +223,12 @@ references:
         url: 'ftp://ftp.flybase.net/genomes/Drosophila_melanogaster/dmel_r6.16_FB2017_03/fasta/dmel-all-chromosome-r6.16.fasta.gz'
         postprocess: "lib.postprocess.dm6.fasta_postprocess"
         indexes:
-          - 'bowtie2'
-          - 'hisat2'
+        - 'bowtie2'
+        - 'hisat2'
   phix:
     default:
       fasta:
         url: 'ftp://igenome:G3nom3s4u@ussd-ftp.illumina.com/PhiX/Illumina/RTA/PhiX_Illumina_RTA.tar.gz'
         postprocess: "lib.postprocess.phix.fasta_postprocess"
         indexes:
-          - 'bowtie2'
+        - 'bowtie2'

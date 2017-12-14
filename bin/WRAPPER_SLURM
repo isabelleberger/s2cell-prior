@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH --job-name="lcdb-wf"
 #SBATCH --partition="niddk,norm"
-#SBATCH --time=24:00:00
+#SBATCH --time=48:00:00
 
 # make logdir
 if [[ ! -e logs ]]; then mkdir -p logs; fi
@@ -20,17 +20,17 @@ if [[ ! -e logs ]]; then mkdir -p logs; fi
     --verbose \
     --cluster 'sbatch {cluster.prefix} --cpus-per-task={threads}  --output=logs/{rule}.o.%j --error=logs/{rule}.e.%j' \
     --use-conda \
-    --configfile config/config.yaml \
-    --latency-wait=60 \
+    --configfile config/copy_config.yaml \
+    --latency-wait=300 \
     ) > "Snakefile.log" 2>&1
 
-SNAKE_PID=$!
+#SNAKE_PID=$!
 
-finish(){
-    echo 'Stopping running snakemake job.'
-    kill -SIGINT $SNAKE_PID
-    exit 0
-}
-trap finish SIGTERM
+#finish(){
+#    echo 'Stopping running snakemake job.'
+#    kill -SIGINT $SNAKE_PID
+#    exit 0
+#}
+#trap finish SIGTERM
 
-wait $SNAKE_PID
+#wait $SNAKE_PID
