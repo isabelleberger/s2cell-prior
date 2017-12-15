@@ -1,0 +1,374 @@
+# sampletable: TSV file defining sample metadata.
+#
+# First column must have header name "samplename".
+sampletable: 'config/sampletable_SE.tsv'
+
+# sample_dir: directory in which each sample is expected to have its own
+# directory and fastq file[s]. If `sampletable` lists a sample with samplename
+# SAMPLE1, then at least the file $sample_dir/SAMPLE1/SAMPLE1_R1.fastq.gz is
+# expected.
+sample_dir: 'data/chipseq_samples'
+
+# Directory to contain reports and other aggregations
+aggregation_dir: 'data/chipseq_aggregation'
+
+# Directory in which merged technical replicates will be stored
+merged_dir: 'data/chipseq_merged'
+
+# Which key in the `references` dict below to use
+assembly: 'dmel'
+
+# If not specified here, use the environment variable REFERENCES_DIR.
+references_dir: '/data/LCDB/lcdb-references'
+
+peaks_dir: 'data/chipseq_peaks'
+
+
+chipseq:
+  # The peak_calling section is a list of dicts, each one defining a single
+  # chipseq peak-calling run. The output will be created according to `label`
+  # and `algorithm`. There will be at least a file
+  # `<peaks_dir>/<algorithm>/<label>/peaks.bed`; other files may be created
+  # depending on the algorithm.
+  #
+  # Note that this directory structure means you can have the same label for
+  # different peak-callers to more easily compare them.
+  #
+  # The `ip` and `control` sections expect names found in the "label" column of
+  # the sampletable. This column describes the technical replicates, and the
+  # merging step of the workflow merges and de-dupes appropriately so that the
+  # peak callers only see BAMs with all duplicates removed.
+  #
+  # The "extra" block is used to pass extra information to the peak-caller in
+  # a run-specific manner. Check the wrapper README for details on this. For
+  # example, the macs2 wrapper passes `extra` verbatim to the command line, but
+  # the spp wrapper handles things differently.
+  #
+  # Each wrapper is built to accept either single or multiple BAMs and output
+  # at least a BED file of peaks.
+  #
+  peak_calling:
+  - label: chip-rep1
+    algorithm: spp
+    ip:
+    - chip-rep1
+    control:
+    - input-rep1
+    extra:
+      fdr: 0.001
+
+  - label: chip-rep2
+    algorithm: spp
+    ip:
+    - chip-rep2
+    control:
+    - input-rep2
+    extra:
+      fdr: 0.001
+
+  - label: SRX191913
+    algorithm: macs2
+    ip:
+    - SRX191913
+    control:
+    - SRX191915
+    extra: '-g dm --bdg --broad --slocal 5000'
+  - label: SRX191914
+    algorithm: macs2
+    ip:
+    - SRX191914
+    control:
+    - SRX191916
+    extra: '-g dm --bdg --broad --slocal 5000'
+  - label: SRX193318
+    algorithm: macs2
+    ip:
+    - SRX193318
+    control:
+    - SRX193308
+    extra: '-g dm --bdg --broad --slocal 5000'
+  - label: SRX193319
+    algorithm: macs2
+    ip:
+    - SRX193319
+    control:
+    - SRX193309
+    extra: '-g dm --bdg --broad --slocal 5000'
+  - label: SRX193320
+    algorithm: macs2
+    ip:
+    - SRX193320
+    control:
+    - SRX193311
+    extra: '-g dm --bdg --broad --slocal 5000'
+  - label: SRX193321
+    algorithm: macs2
+    ip:
+    - SRX193321
+    control:
+    - SRX193308
+    extra: '-g dm --bdg --broad --slocal 5000'
+  - label: SRX193322
+    algorithm: macs2
+    ip:
+    - SRX193322
+    control:
+    - SRX193311
+    extra: '-g dm --bdg --broad --slocal 5000'
+  - label: SRX193323
+    algorithm: macs2
+    ip:
+    - SRX193323
+    control:
+    - SRX193312
+    extra: '-g dm --bdg --broad --slocal 5000'
+  - label: SRX193324
+    algorithm: macs2
+    ip:
+    - SRX193324
+    control:
+    - SRX193313
+    extra: '-g dm --bdg --broad --slocal 5000'
+  - label: SRX193332
+    algorithm: macs2
+    ip:
+    - SRX193332
+    control:
+    - SRX193325
+    extra: '-g dm --bdg --broad --slocal 5000'
+  - label: SRX193333
+    algorithm: macs2
+    ip:
+    - SRX193333
+    control:
+    - SRX193326
+    extra: '-g dm --bdg --broad --slocal 5000'
+  - label: SRX193334
+    algorithm: macs2
+    ip:
+    - SRX193334
+    control:
+    - SRX193328
+    extra: '-g dm --bdg --broad --slocal 5000'
+  - label: SRX193335
+    algorithm: macs2
+    ip:
+    - SRX193335
+    control:
+    - SRX193325
+    extra: '-g dm --bdg --broad --slocal 5000'
+  - label: SRX193336
+    algorithm: macs2
+    ip:
+    - SRX193336
+    control:
+    - SRX193328
+    extra: '-g dm --bdg --broad --slocal 5000'
+  - label: SRX193337
+    algorithm: macs2
+    ip:
+    - SRX193337
+    control:
+    - SRX193329
+    extra: '-g dm --bdg --broad --slocal 5000'
+  - label: SRX193339
+    algorithm: macs2
+    ip:
+    - SRX193339
+    control:
+    - SRX193338
+    extra: '-g dm --bdg --broad --slocal 5000'
+  - label: SRX193340
+    algorithm: macs2
+    ip:
+    - SRX193340
+    control:
+    - SRX193338
+    extra: '-g dm --bdg --broad --slocal 5000'
+  - label: SRX287564
+    algorithm: macs2
+    ip:
+    - SRX287564
+    control:
+    - SRX287562
+    extra: '-g dm --bdg --broad --slocal 5000'
+  - label: SRX287565
+    algorithm: macs2
+    ip:
+    - SRX287565
+    control:
+    - SRX287563
+    extra: '-g dm --bdg --broad --slocal 5000'
+  - label: SRX495277
+    algorithm: macs2
+    ip:
+    - SRX495277
+    control:
+    - SRX495275
+    extra: '-g dm --bdg --broad --slocal 5000'
+  - label: SRX495278
+    algorithm: macs2
+    ip:
+    - SRX495278
+    control:
+    - SRX495276
+    extra: '-g dm --bdg --broad --slocal 5000'
+  - label: SRX495289
+    algorithm: macs2
+    ip:
+    - SRX495289
+    control:
+    - SRX495287
+    extra: '-g dm --bdg --broad --slocal 5000'
+  - label: SRX495290
+    algorithm: macs2
+    ip:
+    - SRX495290
+    control:
+    - SRX495288
+    extra: '-g dm --bdg --broad --slocal 5000'
+  - label: SRX467113
+    algorithm: macs2
+    ip:
+    - SRX467113
+    control:
+    - SRX467111
+    extra: '-g dm --bdg --broad --slocal 5000'
+  - label: SRX467114
+    algorithm: macs2
+    ip:
+    - SRX467114
+    control:
+    - SRX467112
+    extra: '-g dm --bdg --broad --slocal 5000'
+  - label: SRX467117
+    algorithm: macs2
+    ip:
+    - SRX467117
+    control:
+    - SRX467115
+    extra: '-g dm --bdg --broad --slocal 5000'
+  - label: SRX467118
+    algorithm: macs2
+    ip:
+    - SRX467118
+    control:
+    - SRX467116
+    extra: '-g dm --bdg --broad --slocal 5000'
+  - label: SRX2055956
+    algorithm: macs2
+    ip:
+    - SRX2055956
+    control:
+    - SRX2055957
+    extra: '-g dm --bdg --broad --slocal 5000'
+  - label: SRX2055959
+    algorithm: macs2
+    ip:
+    - SRX2055959
+    control:
+    - SRX2055960
+    extra: '-g dm --bdg --broad --slocal 5000'
+  - label: SRX2055962
+    algorithm: macs2
+    ip:
+    - SRX2055962
+    control:
+    - SRX2055963
+    extra: '-g dm --bdg --broad --slocal 5000'
+  - label: SRX2417577
+    algorithm: macs2
+    ip:
+    - SRX2417577
+    control:
+    - SRX2417578
+    extra: '-g dm --bdg --broad --slocal 5000'
+  - label: SRX016158
+    algorithm: macs2
+    ip:
+    - SRX016158
+    control:
+    - SRX016159
+    extra: '-g dm --bdg --broad --slocal 5000'
+  - label: SRX016160
+    algorithm: macs2
+    ip:
+    - SRX016160
+    control:
+    - SRX016161
+    extra: '-g dm --bdg --broad --slocal 5000'
+  - label: SRX046653
+    algorithm: macs2
+    ip:
+    - SRX046653
+    control:
+    - SRX046652
+    extra: '-g dm --bdg --broad --slocal 5000'
+aligner:
+  index: 'bowtie2'
+  tag: 'r6-16'
+gtf:
+  tag: 'r6-16'
+
+# references has the structure:
+#
+#   assembly:           [ used as top-level dir for references ]
+#     tag:              [ user-defined; often indicates version or release ]
+#       type:           [ must be either "gtf" or "fasta" ]
+#         url:          [ string or list of urls ]
+#         postprocess:  [ string of importable function or dict of function and args ]
+#         conversions:  [ list of gtf conversions; only if type == gtf ]
+#         indexes:      [ list of indexes to build; only if type == fasta ]
+
+references:
+  dmel:
+    test:
+      fasta:
+        url: "https://raw.githubusercontent.com/lcdb/lcdb-test-data/add-chipseq/data/seq/dm6.small.fa"
+        postprocess: 'lib.common.gzipped'
+        indexes:
+        - 'bowtie2'
+    r6-16:
+      gtf:
+        url: 'ftp://ftp.flybase.net/genomes/Drosophila_melanogaster/dmel_r6.16_FB2017_03/gtf/dmel-all-r6.16.gtf.gz'
+        postprocess: "lib.postprocess.dm6.gtf_postprocess"
+        conversions:
+        - 'refflat'
+        - gffutils:   # kwargs below will be provided to `gffutils.create_db`
+            merge_strategy: 'merge'
+            id_spec:
+              transcript: ['transcript_id', 'transcript_symbol']
+              gene: ['gene_id', 'gene_symbol']
+            gtf_transcript_key: 'transcript_id'
+            gtf_gene_key: 'gene_id'
+            disable_infer_genes: true
+
+          # the attribute from the GTF to consider gene ID
+        - genelist:
+            gene_id: 'gene_id'
+
+        - annotation_hub:
+            ahkey: 'AH49581'
+            keytype: 'ENSEMBL'
+
+      fb_annotation:
+        url: 'ftp://ftp.flybase.net/releases/FB2017_03/precomputed_files/genes/fbgn_annotation_ID.tsv.gz'
+        postprocess: "lib.postprocess.dm6.fb_annotation_postprocess"
+
+      fb_synonym:
+        url: 'ftp://ftp.flybase.net/releases/FB2017_03/precomputed_files/synonyms/fb_synonym_fb_2017_03.tsv.gz'
+        postprocess: "lib.postprocess.dm6.fb_synonym_postprocess"
+
+      fasta:
+        url: 'ftp://ftp.flybase.net/genomes/Drosophila_melanogaster/dmel_r6.16_FB2017_03/fasta/dmel-all-chromosome-r6.16.fasta.gz'
+        postprocess: "lib.postprocess.dm6.fasta_postprocess"
+        indexes:
+        - 'bowtie2'
+        - 'hisat2'
+  phix:
+    default:
+      fasta:
+        url: 'ftp://igenome:G3nom3s4u@ussd-ftp.illumina.com/PhiX/Illumina/RTA/PhiX_Illumina_RTA.tar.gz'
+        postprocess: "lib.postprocess.phix.fasta_postprocess"
+        indexes:
+        - 'bowtie2'
