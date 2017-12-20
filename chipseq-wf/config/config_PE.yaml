@@ -1,7 +1,7 @@
 # sampletable: TSV file defining sample metadata.
 #
 # First column must have header name "samplename".
-sampletable: 'config/sampletable.tsv'
+sampletable: 'config/sampletable_PE.tsv'
 
 # sample_dir: directory in which each sample is expected to have its own
 # directory and fastq file[s]. If `sampletable` lists a sample with samplename
@@ -72,49 +72,49 @@ chipseq:
     - SRX046657
     control:
     - SRX046656
-    extra: '-g dm --bdg --broad --slocal 5000'
+    extra: '-g dm --bdg --broad --slocal 5000 --nomodel --extsize 147'
   - label: SRX810430
     algorithm: macs2
     ip:
     - SRX810430
     control:
     - SRX810433
-    extra: '-g dm --bdg --broad --slocal 5000'
+    extra: '-g dm --bdg --broad --slocal 5000 --nomodel --extsize 147'
   - label: SRX810427
     algorithm: macs2
     ip:
     - SRX810427
     control:
     - SRX810433
-    extra: '-g dm --bdg --broad --slocal 5000'
+    extra: '-g dm --bdg --broad --slocal 5000 --nomodel --extsize 147'
   - label: SRX810429
     algorithm: macs2
     ip:
     - SRX810429
     control:
     - SRX810435
-    extra: '-g dm --bdg --broad --slocal 5000'
+    extra: '-g dm --bdg --broad --slocal 5000 --nomodel --extsize 147'
   - label: SRX810432
     algorithm: macs2
     ip:
     - SRX810432
     control:
     - SRX810435
-    extra: '-g dm --bdg --broad --slocal 5000'
+    extra: '-g dm --bdg --broad --slocal 5000 --nomodel --extsize 147'
   - label: SRX810428
     algorithm: macs2
     ip:
     - SRX810428
     control:
     - SRX810434
-    extra: '-g dm --bdg --broad --slocal 5000'
+    extra: '-g dm --bdg --broad --slocal 5000 --nomodel --extsize 147'
   - label: SRX810431
     algorithm: macs2
     ip:
     - SRX810431
     control:
     - SRX810434
-    extra: '-g dm --bdg --broad --slocal 5000'
+    extra: '-g dm --bdg --broad --slocal 5000 --nomodel --extsize 147'
 aligner:
   index: 'bowtie2'
   tag: 'r6-16'

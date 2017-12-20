@@ -1,0 +1,2341 @@
+# sampletable: TSV file defining sample metadata.
+#
+# First column must have header name "samplename".
+sampletable: 'config/sampletable_tf.tsv'
+
+# sample_dir: directory in which each sample is expected to have its own
+# directory and fastq file[s]. If `sampletable` lists a sample with samplename
+# SAMPLE1, then at least the file $sample_dir/SAMPLE1/SAMPLE1_R1.fastq.gz is
+# expected.
+sample_dir: 'data/chipseq_samples'
+
+# Directory to contain reports and other aggregations
+aggregation_dir: 'data/chipseq_aggregation'
+
+# Directory in which merged technical replicates will be stored
+merged_dir: 'data/chipseq_merged'
+
+# Which key in the `references` dict below to use
+assembly: 'dmel'
+
+# If not specified here, use the environment variable REFERENCES_DIR.
+references_dir: '/data/LCDB/lcdb-references'
+
+peaks_dir: 'data/chipseq_peaks'
+
+
+chipseq:
+  # The peak_calling section is a list of dicts, each one defining a single
+  # chipseq peak-calling run. The output will be created according to `label`
+  # and `algorithm`. There will be at least a file
+  # `<peaks_dir>/<algorithm>/<label>/peaks.bed`; other files may be created
+  # depending on the algorithm.
+  #
+  # Note that this directory structure means you can have the same label for
+  # different peak-callers to more easily compare them.
+  #
+  # The `ip` and `control` sections expect names found in the "label" column of
+  # the sampletable. This column describes the technical replicates, and the
+  # merging step of the workflow merges and de-dupes appropriately so that the
+  # peak callers only see BAMs with all duplicates removed.
+  #
+  # The "extra" block is used to pass extra information to the peak-caller in
+  # a run-specific manner. Check the wrapper README for details on this. For
+  # example, the macs2 wrapper passes `extra` verbatim to the command line, but
+  # the spp wrapper handles things differently.
+  #
+  # Each wrapper is built to accept either single or multiple BAMs and output
+  # at least a BED file of peaks.
+  #
+  peak_calling:
+  - label: chip-rep1
+    algorithm: spp
+    ip:
+    - chip-rep1
+    control:
+    - input-rep1
+    extra:
+      fdr: 0.001
+
+  - label: chip-rep2
+    algorithm: spp
+    ip:
+    - chip-rep2
+    control:
+    - input-rep2
+    extra:
+      fdr: 0.001
+
+  - label: SRX2055953
+    algorithm: macs2
+    ip:
+    - SRX2055953
+    control:
+    - SRX2055954
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: SRX2055953
+    algorithm: spp
+    ip:
+    - SRX2055953
+    control:
+    - SRX2055954
+    extra:
+      fdr: 0.001
+  - label: ERX242728
+    algorithm: macs2
+    ip:
+    - ERX242728
+    control:
+    - ERX242715
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: ERX242728
+    algorithm: spp
+    ip:
+    - ERX242728
+    control:
+    - ERX242715
+    extra:
+      fdr: 0.001
+  - label: SRX883604
+    algorithm: macs2
+    ip:
+    - SRX883604
+    control:
+    - SRX883600
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: SRX883604
+    algorithm: spp
+    ip:
+    - SRX883604
+    control:
+    - SRX883600
+    extra:
+      fdr: 0.001
+  - label: SRX886166
+    algorithm: macs2
+    ip:
+    - SRX886166
+    control:
+    - SRX886167
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: SRX886166
+    algorithm: spp
+    ip:
+    - SRX886166
+    control:
+    - SRX886167
+    extra:
+      fdr: 0.001
+  - label: SRX046654
+    algorithm: macs2
+    ip:
+    - SRX046654
+    control:
+    - SRX046652
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: SRX046654
+    algorithm: spp
+    ip:
+    - SRX046654
+    control:
+    - SRX046652
+    extra:
+      fdr: 0.001
+  - label: ERX242712
+    algorithm: macs2
+    ip:
+    - ERX242712
+    control:
+    - ERX242717
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: ERX242712
+    algorithm: spp
+    ip:
+    - ERX242712
+    control:
+    - ERX242717
+    extra:
+      fdr: 0.001
+  - label: SRX685462
+    algorithm: macs2
+    ip:
+    - SRX685462
+    control:
+    - SRX685466
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: SRX685462
+    algorithm: spp
+    ip:
+    - SRX685462
+    control:
+    - SRX685466
+    extra:
+      fdr: 0.001
+  - label: SRX306193
+    algorithm: macs2
+    ip:
+    - SRX306193
+    control:
+    - SRX306195
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: SRX306193
+    algorithm: spp
+    ip:
+    - SRX306193
+    control:
+    - SRX306195
+    extra:
+      fdr: 0.001
+  - label: ERX242713
+    algorithm: macs2
+    ip:
+    - ERX242713
+    control:
+    - ERX242729
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: ERX242713
+    algorithm: spp
+    ip:
+    - ERX242713
+    control:
+    - ERX242729
+    extra:
+      fdr: 0.001
+  - label: SRX149191
+    algorithm: macs2
+    ip:
+    - SRX149191
+    control:
+    - SRX149195
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: SRX149191
+    algorithm: spp
+    ip:
+    - SRX149191
+    control:
+    - SRX149195
+    extra:
+      fdr: 0.001
+  - label: SRX2055958
+    algorithm: macs2
+    ip:
+    - SRX2055958
+    control:
+    - SRX2055960
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: SRX2055958
+    algorithm: spp
+    ip:
+    - SRX2055958
+    control:
+    - SRX2055960
+    extra:
+      fdr: 0.001
+  - label: SRX149189
+    algorithm: macs2
+    ip:
+    - SRX149189
+    control:
+    - SRX149193
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: SRX149189
+    algorithm: spp
+    ip:
+    - SRX149189
+    control:
+    - SRX149193
+    extra:
+      fdr: 0.001
+  - label: SRX359798
+    algorithm: macs2
+    ip:
+    - SRX359798
+    control:
+    - SRX359796
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: SRX359798
+    algorithm: spp
+    ip:
+    - SRX359798
+    control:
+    - SRX359796
+    extra:
+      fdr: 0.001
+  - label: SRX326969
+    algorithm: macs2
+    ip:
+    - SRX326969
+    control:
+    - SRX326969
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: SRX326969
+    algorithm: spp
+    ip:
+    - SRX326969
+    control:
+    - SRX326969
+    extra:
+      fdr: 0.001
+  - label: SRX2055947
+    algorithm: macs2
+    ip:
+    - SRX2055947
+    control:
+    - SRX2055950
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: SRX2055947
+    algorithm: spp
+    ip:
+    - SRX2055947
+    control:
+    - SRX2055950
+    extra:
+      fdr: 0.001
+  - label: SRX306191
+    algorithm: macs2
+    ip:
+    - SRX306191
+    control:
+    - SRX306192
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: SRX306191
+    algorithm: spp
+    ip:
+    - SRX306191
+    control:
+    - SRX306192
+    extra:
+      fdr: 0.001
+  - label: SRX2055964
+    algorithm: macs2
+    ip:
+    - SRX2055964
+    control:
+    - SRX2055965
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: SRX2055964
+    algorithm: spp
+    ip:
+    - SRX2055964
+    control:
+    - SRX2055965
+    extra:
+      fdr: 0.001
+  - label: SRX018631
+    algorithm: macs2
+    ip:
+    - SRX018631
+    control:
+    - SRX018628
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: SRX018631
+    algorithm: spp
+    ip:
+    - SRX018631
+    control:
+    - SRX018628
+    extra:
+      fdr: 0.001
+  - label: SRX1433399
+    algorithm: macs2
+    ip:
+    - SRX1433399
+    control:
+    - SRX1433393
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: SRX1433399
+    algorithm: spp
+    ip:
+    - SRX1433399
+    control:
+    - SRX1433393
+    extra:
+      fdr: 0.001
+  - label: SRX097620
+    algorithm: macs2
+    ip:
+    - SRX097620
+    control:
+    - SRX097621
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: SRX097620
+    algorithm: spp
+    ip:
+    - SRX097620
+    control:
+    - SRX097621
+    extra:
+      fdr: 0.001
+  - label: SRX2172429
+    algorithm: macs2
+    ip:
+    - SRX2172429
+    control:
+    - SRX2172426
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: SRX2172429
+    algorithm: spp
+    ip:
+    - SRX2172429
+    control:
+    - SRX2172426
+    extra:
+      fdr: 0.001
+  - label: ERX242704
+    algorithm: macs2
+    ip:
+    - ERX242704
+    control:
+    - ERX242726
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: ERX242704
+    algorithm: spp
+    ip:
+    - ERX242704
+    control:
+    - ERX242726
+    extra:
+      fdr: 0.001
+  - label: SRX273676
+    algorithm: macs2
+    ip:
+    - SRX273676
+    control:
+    - SRX273673
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: SRX273676
+    algorithm: spp
+    ip:
+    - SRX273676
+    control:
+    - SRX273673
+    extra:
+      fdr: 0.001
+  - label: SRX886165
+    algorithm: macs2
+    ip:
+    - SRX886165
+    control:
+    - SRX886167
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: SRX886165
+    algorithm: spp
+    ip:
+    - SRX886165
+    control:
+    - SRX886167
+    extra:
+      fdr: 0.001
+  - label: SRX1433396
+    algorithm: macs2
+    ip:
+    - SRX1433396
+    control:
+    - SRX1433390
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: SRX1433396
+    algorithm: spp
+    ip:
+    - SRX1433396
+    control:
+    - SRX1433390
+    extra:
+      fdr: 0.001
+  - label: SRX097617
+    algorithm: macs2
+    ip:
+    - SRX097617
+    control:
+    - SRX097619
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: SRX097617
+    algorithm: spp
+    ip:
+    - SRX097617
+    control:
+    - SRX097619
+    extra:
+      fdr: 0.001
+  - label: ERX088859
+    algorithm: macs2
+    ip:
+    - ERX088859
+    control:
+    - ERX088857
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: ERX088859
+    algorithm: spp
+    ip:
+    - ERX088859
+    control:
+    - ERX088857
+    extra:
+      fdr: 0.001
+  - label: SRX907137
+    algorithm: macs2
+    ip:
+    - SRX907137
+    control:
+    - SRX907135
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: SRX907137
+    algorithm: spp
+    ip:
+    - SRX907137
+    control:
+    - SRX907135
+    extra:
+      fdr: 0.001
+  - label: SRX054533
+    algorithm: macs2
+    ip:
+    - SRX054533
+    control:
+    - SRX054534
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: SRX054533
+    algorithm: spp
+    ip:
+    - SRX054533
+    control:
+    - SRX054534
+    extra:
+      fdr: 0.001
+  - label: SRX511131
+    algorithm: macs2
+    ip:
+    - SRX511131
+    control:
+    - SRX511132
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: SRX511131
+    algorithm: spp
+    ip:
+    - SRX511131
+    control:
+    - SRX511132
+    extra:
+      fdr: 0.001
+  - label: SRX385807
+    algorithm: macs2
+    ip:
+    - SRX385807
+    control:
+    - SRX385809
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: SRX385807
+    algorithm: spp
+    ip:
+    - SRX385807
+    control:
+    - SRX385809
+    extra:
+      fdr: 0.001
+  - label: SRX685464
+    algorithm: macs2
+    ip:
+    - SRX685464
+    control:
+    - SRX685468
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: SRX685464
+    algorithm: spp
+    ip:
+    - SRX685464
+    control:
+    - SRX685468
+    extra:
+      fdr: 0.001
+  - label: ERX402108
+    algorithm: macs2
+    ip:
+    - ERX402108
+    control:
+    - ERX402102
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: ERX402108
+    algorithm: spp
+    ip:
+    - ERX402108
+    control:
+    - ERX402102
+    extra:
+      fdr: 0.001
+  - label: SRX511133
+    algorithm: macs2
+    ip:
+    - SRX511133
+    control:
+    - SRX511134
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: SRX511133
+    algorithm: spp
+    ip:
+    - SRX511133
+    control:
+    - SRX511134
+    extra:
+      fdr: 0.001
+  - label: SRX306196
+    algorithm: macs2
+    ip:
+    - SRX306196
+    control:
+    - SRX306198
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: SRX306196
+    algorithm: spp
+    ip:
+    - SRX306196
+    control:
+    - SRX306198
+    extra:
+      fdr: 0.001
+  - label: SRX306201
+    algorithm: macs2
+    ip:
+    - SRX306201
+    control:
+    - SRX306202
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: SRX306201
+    algorithm: spp
+    ip:
+    - SRX306201
+    control:
+    - SRX306202
+    extra:
+      fdr: 0.001
+  - label: SRX511127
+    algorithm: macs2
+    ip:
+    - SRX511127
+    control:
+    - SRX511128
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: SRX511127
+    algorithm: spp
+    ip:
+    - SRX511127
+    control:
+    - SRX511128
+    extra:
+      fdr: 0.001
+  - label: SRX2055948
+    algorithm: macs2
+    ip:
+    - SRX2055948
+    control:
+    - SRX2055950
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: SRX2055948
+    algorithm: spp
+    ip:
+    - SRX2055948
+    control:
+    - SRX2055950
+    extra:
+      fdr: 0.001
+  - label: SRX326967
+    algorithm: macs2
+    ip:
+    - SRX326967
+    control:
+    - SRX326968
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: SRX326967
+    algorithm: spp
+    ip:
+    - SRX326967
+    control:
+    - SRX326968
+    extra:
+      fdr: 0.001
+  - label: SRX2055961
+    algorithm: macs2
+    ip:
+    - SRX2055961
+    control:
+    - SRX2055963
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: SRX2055961
+    algorithm: spp
+    ip:
+    - SRX2055961
+    control:
+    - SRX2055963
+    extra:
+      fdr: 0.001
+  - label: ERX1403351
+    algorithm: macs2
+    ip:
+    - ERX1403351
+    control:
+    - ERX1403348
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: ERX1403351
+    algorithm: spp
+    ip:
+    - ERX1403351
+    control:
+    - ERX1403348
+    extra:
+      fdr: 0.001
+  - label: SRX191912
+    algorithm: macs2
+    ip:
+    - SRX191912
+    control:
+    - SRX191916
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: SRX191912
+    algorithm: spp
+    ip:
+    - SRX191912
+    control:
+    - SRX191916
+    extra:
+      fdr: 0.001
+  - label: SRX326966
+    algorithm: macs2
+    ip:
+    - SRX326966
+    control:
+    - SRX326968
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: SRX326966
+    algorithm: spp
+    ip:
+    - SRX326966
+    control:
+    - SRX326968
+    extra:
+      fdr: 0.001
+  - label: SRX017463
+    algorithm: macs2
+    ip:
+    - SRX017463
+    control:
+    - SRX017464
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: SRX017463
+    algorithm: spp
+    ip:
+    - SRX017463
+    control:
+    - SRX017464
+    extra:
+      fdr: 0.001
+  - label: ERX402114
+    algorithm: macs2
+    ip:
+    - ERX402114
+    control:
+    - ERX402113
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: ERX402114
+    algorithm: spp
+    ip:
+    - ERX402114
+    control:
+    - ERX402113
+    extra:
+      fdr: 0.001
+  - label: SRX1158169
+    algorithm: macs2
+    ip:
+    - SRX1158169
+    control:
+    - SRX1158170
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: SRX1158169
+    algorithm: spp
+    ip:
+    - SRX1158169
+    control:
+    - SRX1158170
+    extra:
+      fdr: 0.001
+  - label: SRX1433398
+    algorithm: macs2
+    ip:
+    - SRX1433398
+    control:
+    - SRX1433392
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: SRX1433398
+    algorithm: spp
+    ip:
+    - SRX1433398
+    control:
+    - SRX1433392
+    extra:
+      fdr: 0.001
+  - label: SRX495790
+    algorithm: macs2
+    ip:
+    - SRX495790
+    control:
+    - SRX495788
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: SRX495790
+    algorithm: spp
+    ip:
+    - SRX495790
+    control:
+    - SRX495788
+    extra:
+      fdr: 0.001
+  - label: SRX1158171
+    algorithm: macs2
+    ip:
+    - SRX1158171
+    control:
+    - SRX1158172
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: SRX1158171
+    algorithm: spp
+    ip:
+    - SRX1158171
+    control:
+    - SRX1158172
+    extra:
+      fdr: 0.001
+  - label: ERX088868
+    algorithm: macs2
+    ip:
+    - ERX088868
+    control:
+    - ERX088875
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: ERX088868
+    algorithm: spp
+    ip:
+    - ERX088868
+    control:
+    - ERX088875
+    extra:
+      fdr: 0.001
+  - label: SRX326970
+    algorithm: macs2
+    ip:
+    - SRX326970
+    control:
+    - SRX326969
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: SRX326970
+    algorithm: spp
+    ip:
+    - SRX326970
+    control:
+    - SRX326969
+    extra:
+      fdr: 0.001
+  - label: SRX1078885
+    algorithm: macs2
+    ip:
+    - SRX1078885
+    control:
+    - SRX1078887
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: SRX1078885
+    algorithm: spp
+    ip:
+    - SRX1078885
+    control:
+    - SRX1078887
+    extra:
+      fdr: 0.001
+  - label: ERX402137
+    algorithm: macs2
+    ip:
+    - ERX402137
+    control:
+    - ERX402113
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: ERX402137
+    algorithm: spp
+    ip:
+    - ERX402137
+    control:
+    - ERX402113
+    extra:
+      fdr: 0.001
+  - label: SRX883605
+    algorithm: macs2
+    ip:
+    - SRX883605
+    control:
+    - SRX883601
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: SRX883605
+    algorithm: spp
+    ip:
+    - SRX883605
+    control:
+    - SRX883601
+    extra:
+      fdr: 0.001
+  - label: SRX271403
+    algorithm: macs2
+    ip:
+    - SRX271403
+    control:
+    - SRX271405
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: SRX271403
+    algorithm: spp
+    ip:
+    - SRX271403
+    control:
+    - SRX271405
+    extra:
+      fdr: 0.001
+  - label: SRX685463
+    algorithm: macs2
+    ip:
+    - SRX685463
+    control:
+    - SRX685467
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: SRX685463
+    algorithm: spp
+    ip:
+    - SRX685463
+    control:
+    - SRX685467
+    extra:
+      fdr: 0.001
+  - label: SRX330270
+    algorithm: macs2
+    ip:
+    - SRX330270
+    control:
+    - SRX330271
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: SRX330270
+    algorithm: spp
+    ip:
+    - SRX330270
+    control:
+    - SRX330271
+    extra:
+      fdr: 0.001
+  - label: SRX495270
+    algorithm: macs2
+    ip:
+    - SRX495270
+    control:
+    - SRX495268
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: SRX495270
+    algorithm: spp
+    ip:
+    - SRX495270
+    control:
+    - SRX495268
+    extra:
+      fdr: 0.001
+  - label: SRX2055944
+    algorithm: macs2
+    ip:
+    - SRX2055944
+    control:
+    - SRX2055946
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: SRX2055944
+    algorithm: spp
+    ip:
+    - SRX2055944
+    control:
+    - SRX2055946
+    extra:
+      fdr: 0.001
+  - label: ERX102367
+    algorithm: macs2
+    ip:
+    - ERX102367
+    control:
+    - ERX102381
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: ERX102367
+    algorithm: spp
+    ip:
+    - ERX102367
+    control:
+    - ERX102381
+    extra:
+      fdr: 0.001
+  - label: SRX385810
+    algorithm: macs2
+    ip:
+    - SRX385810
+    control:
+    - SRX385809
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: SRX385810
+    algorithm: spp
+    ip:
+    - SRX385810
+    control:
+    - SRX385809
+    extra:
+      fdr: 0.001
+  - label: SRX885700
+    algorithm: macs2
+    ip:
+    - SRX885700
+    control:
+    - SRX885701
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: SRX885700
+    algorithm: spp
+    ip:
+    - SRX885700
+    control:
+    - SRX885701
+    extra:
+      fdr: 0.001
+  - label: SRX1158167
+    algorithm: macs2
+    ip:
+    - SRX1158167
+    control:
+    - SRX1158168
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: SRX1158167
+    algorithm: spp
+    ip:
+    - SRX1158167
+    control:
+    - SRX1158168
+    extra:
+      fdr: 0.001
+  - label: ERX088869
+    algorithm: macs2
+    ip:
+    - ERX088869
+    control:
+    - ERX088870
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: ERX088869
+    algorithm: spp
+    ip:
+    - ERX088869
+    control:
+    - ERX088870
+    extra:
+      fdr: 0.001
+  - label: ERX102369
+    algorithm: macs2
+    ip:
+    - ERX102369
+    control:
+    - ERX102366
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: ERX102369
+    algorithm: spp
+    ip:
+    - ERX102369
+    control:
+    - ERX102366
+    extra:
+      fdr: 0.001
+  - label: ERX402133
+    algorithm: macs2
+    ip:
+    - ERX402133
+    control:
+    - ERX402102
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: ERX402133
+    algorithm: spp
+    ip:
+    - ERX402133
+    control:
+    - ERX402102
+    extra:
+      fdr: 0.001
+  - label: SRX386677
+    algorithm: macs2
+    ip:
+    - SRX386677
+    control:
+    - SRX386678
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: SRX386677
+    algorithm: spp
+    ip:
+    - SRX386677
+    control:
+    - SRX386678
+    extra:
+      fdr: 0.001
+  - label: SRX306190
+    algorithm: macs2
+    ip:
+    - SRX306190
+    control:
+    - SRX306192
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: SRX306190
+    algorithm: spp
+    ip:
+    - SRX306190
+    control:
+    - SRX306192
+    extra:
+      fdr: 0.001
+  - label: SRX191908
+    algorithm: macs2
+    ip:
+    - SRX191908
+    control:
+    - SRX191916
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: SRX191908
+    algorithm: spp
+    ip:
+    - SRX191908
+    control:
+    - SRX191916
+    extra:
+      fdr: 0.001
+  - label: SRX1389385
+    algorithm: macs2
+    ip:
+    - SRX1389385
+    control:
+    - SRX1389383
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: SRX1389385
+    algorithm: spp
+    ip:
+    - SRX1389385
+    control:
+    - SRX1389383
+    extra:
+      fdr: 0.001
+  - label: SRX2055951
+    algorithm: macs2
+    ip:
+    - SRX2055951
+    control:
+    - SRX2055952
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: SRX2055951
+    algorithm: spp
+    ip:
+    - SRX2055951
+    control:
+    - SRX2055952
+    extra:
+      fdr: 0.001
+  - label: SRX018632
+    algorithm: macs2
+    ip:
+    - SRX018632
+    control:
+    - SRX018628
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: SRX018632
+    algorithm: spp
+    ip:
+    - SRX018632
+    control:
+    - SRX018628
+    extra:
+      fdr: 0.001
+  - label: SRX097615
+    algorithm: macs2
+    ip:
+    - SRX097615
+    control:
+    - SRX097619
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: SRX097615
+    algorithm: spp
+    ip:
+    - SRX097615
+    control:
+    - SRX097619
+    extra:
+      fdr: 0.001
+  - label: SRX2055966
+    algorithm: macs2
+    ip:
+    - SRX2055966
+    control:
+    - SRX2055967
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: SRX2055966
+    algorithm: spp
+    ip:
+    - SRX2055966
+    control:
+    - SRX2055967
+    extra:
+      fdr: 0.001
+  - label: SRX306197
+    algorithm: macs2
+    ip:
+    - SRX306197
+    control:
+    - SRX306198
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: SRX306197
+    algorithm: spp
+    ip:
+    - SRX306197
+    control:
+    - SRX306198
+    extra:
+      fdr: 0.001
+  - label: SRX273674
+    algorithm: macs2
+    ip:
+    - SRX273674
+    control:
+    - SRX273673
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: SRX273674
+    algorithm: spp
+    ip:
+    - SRX273674
+    control:
+    - SRX273673
+    extra:
+      fdr: 0.001
+  - label: ERX088858
+    algorithm: macs2
+    ip:
+    - ERX088858
+    control:
+    - ERX088857
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: ERX088858
+    algorithm: spp
+    ip:
+    - ERX088858
+    control:
+    - ERX088857
+    extra:
+      fdr: 0.001
+  - label: SRX385808
+    algorithm: macs2
+    ip:
+    - SRX385808
+    control:
+    - SRX385809
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: SRX385808
+    algorithm: spp
+    ip:
+    - SRX385808
+    control:
+    - SRX385809
+    extra:
+      fdr: 0.001
+  - label: SRX097616
+    algorithm: macs2
+    ip:
+    - SRX097616
+    control:
+    - SRX097619
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: SRX097616
+    algorithm: spp
+    ip:
+    - SRX097616
+    control:
+    - SRX097619
+    extra:
+      fdr: 0.001
+  - label: SRX149192
+    algorithm: macs2
+    ip:
+    - SRX149192
+    control:
+    - SRX149196
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: SRX149192
+    algorithm: spp
+    ip:
+    - SRX149192
+    control:
+    - SRX149196
+    extra:
+      fdr: 0.001
+  - label: SRX1433401
+    algorithm: macs2
+    ip:
+    - SRX1433401
+    control:
+    - SRX1433395
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: SRX1433401
+    algorithm: spp
+    ip:
+    - SRX1433401
+    control:
+    - SRX1433395
+    extra:
+      fdr: 0.001
+  - label: SRX1433397
+    algorithm: macs2
+    ip:
+    - SRX1433397
+    control:
+    - SRX1433391
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: SRX1433397
+    algorithm: spp
+    ip:
+    - SRX1433397
+    control:
+    - SRX1433391
+    extra:
+      fdr: 0.001
+  - label: SRX193331
+    algorithm: macs2
+    ip:
+    - SRX193331
+    control:
+    - SRX193327
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: SRX193331
+    algorithm: spp
+    ip:
+    - SRX193331
+    control:
+    - SRX193327
+    extra:
+      fdr: 0.001
+  - label: SRX2055945
+    algorithm: macs2
+    ip:
+    - SRX2055945
+    control:
+    - SRX2055946
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: SRX2055945
+    algorithm: spp
+    ip:
+    - SRX2055945
+    control:
+    - SRX2055946
+    extra:
+      fdr: 0.001
+  - label: SRX1179572
+    algorithm: macs2
+    ip:
+    - SRX1179572
+    control:
+    - SRX1179571
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: SRX1179572
+    algorithm: spp
+    ip:
+    - SRX1179572
+    control:
+    - SRX1179571
+    extra:
+      fdr: 0.001
+  - label: SRX2172425
+    algorithm: macs2
+    ip:
+    - SRX2172425
+    control:
+    - SRX2172430
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: SRX2172425
+    algorithm: spp
+    ip:
+    - SRX2172425
+    control:
+    - SRX2172430
+    extra:
+      fdr: 0.001
+  - label: SRX1078884
+    algorithm: macs2
+    ip:
+    - SRX1078884
+    control:
+    - SRX1078886
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: SRX1078884
+    algorithm: spp
+    ip:
+    - SRX1078884
+    control:
+    - SRX1078886
+    extra:
+      fdr: 0.001
+  - label: SRX330269
+    algorithm: macs2
+    ip:
+    - SRX330269
+    control:
+    - SRX330271
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: SRX330269
+    algorithm: spp
+    ip:
+    - SRX330269
+    control:
+    - SRX330271
+    extra:
+      fdr: 0.001
+  - label: ERX242724
+    algorithm: macs2
+    ip:
+    - ERX242724
+    control:
+    - ERX242716
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: ERX242724
+    algorithm: spp
+    ip:
+    - ERX242724
+    control:
+    - ERX242716
+    extra:
+      fdr: 0.001
+  - label: SRX2055943
+    algorithm: macs2
+    ip:
+    - SRX2055943
+    control:
+    - SRX2055946
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: SRX2055943
+    algorithm: spp
+    ip:
+    - SRX2055943
+    control:
+    - SRX2055946
+    extra:
+      fdr: 0.001
+  - label: SRX191909
+    algorithm: macs2
+    ip:
+    - SRX191909
+    control:
+    - SRX191915
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: SRX191909
+    algorithm: spp
+    ip:
+    - SRX191909
+    control:
+    - SRX191915
+    extra:
+      fdr: 0.001
+  - label: SRX306194
+    algorithm: macs2
+    ip:
+    - SRX306194
+    control:
+    - SRX306195
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: SRX306194
+    algorithm: spp
+    ip:
+    - SRX306194
+    control:
+    - SRX306195
+    extra:
+      fdr: 0.001
+  - label: SRX1158165
+    algorithm: macs2
+    ip:
+    - SRX1158165
+    control:
+    - SRX1158166
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: SRX1158165
+    algorithm: spp
+    ip:
+    - SRX1158165
+    control:
+    - SRX1158166
+    extra:
+      fdr: 0.001
+  - label: ERX242711
+    algorithm: macs2
+    ip:
+    - ERX242711
+    control:
+    - ERX242707
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: ERX242711
+    algorithm: spp
+    ip:
+    - ERX242711
+    control:
+    - ERX242707
+    extra:
+      fdr: 0.001
+  - label: SRX1389387
+    algorithm: macs2
+    ip:
+    - SRX1389387
+    control:
+    - SRX1389386
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: SRX1389387
+    algorithm: spp
+    ip:
+    - SRX1389387
+    control:
+    - SRX1389386
+    extra:
+      fdr: 0.001
+  - label: SRX511123
+    algorithm: macs2
+    ip:
+    - SRX511123
+    control:
+    - SRX511124
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: SRX511123
+    algorithm: spp
+    ip:
+    - SRX511123
+    control:
+    - SRX511124
+    extra:
+      fdr: 0.001
+  - label: SRX022743
+    algorithm: macs2
+    ip:
+    - SRX022743
+    control:
+    - SRX022744
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: SRX022743
+    algorithm: spp
+    ip:
+    - SRX022743
+    control:
+    - SRX022744
+    extra:
+      fdr: 0.001
+  - label: SRX160145
+    algorithm: macs2
+    ip:
+    - SRX160145
+    control:
+    - SRX160146
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: SRX160145
+    algorithm: spp
+    ip:
+    - SRX160145
+    control:
+    - SRX160146
+    extra:
+      fdr: 0.001
+  - label: SRX191907
+    algorithm: macs2
+    ip:
+    - SRX191907
+    control:
+    - SRX191915
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: SRX191907
+    algorithm: spp
+    ip:
+    - SRX191907
+    control:
+    - SRX191915
+    extra:
+      fdr: 0.001
+  - label: SRX193314
+    algorithm: macs2
+    ip:
+    - SRX193314
+    control:
+    - SRX193313
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: SRX193314
+    algorithm: spp
+    ip:
+    - SRX193314
+    control:
+    - SRX193313
+    extra:
+      fdr: 0.001
+  - label: SRX1389384
+    algorithm: macs2
+    ip:
+    - SRX1389384
+    control:
+    - SRX1389383
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: SRX1389384
+    algorithm: spp
+    ip:
+    - SRX1389384
+    control:
+    - SRX1389383
+    extra:
+      fdr: 0.001
+  - label: ERX242727
+    algorithm: macs2
+    ip:
+    - ERX242727
+    control:
+    - ERX242723
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: ERX242727
+    algorithm: spp
+    ip:
+    - ERX242727
+    control:
+    - ERX242723
+    extra:
+      fdr: 0.001
+  - label: SRX097618
+    algorithm: macs2
+    ip:
+    - SRX097618
+    control:
+    - SRX097619
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: SRX097618
+    algorithm: spp
+    ip:
+    - SRX097618
+    control:
+    - SRX097619
+    extra:
+      fdr: 0.001
+  - label: SRX1848135
+    algorithm: macs2
+    ip:
+    - SRX1848135
+    control:
+    - SRX1848136
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: SRX1848135
+    algorithm: spp
+    ip:
+    - SRX1848135
+    control:
+    - SRX1848136
+    extra:
+      fdr: 0.001
+  - label: SRX149198
+    algorithm: macs2
+    ip:
+    - SRX149198
+    control:
+    - SRX149200
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: SRX149198
+    algorithm: spp
+    ip:
+    - SRX149198
+    control:
+    - SRX149200
+    extra:
+      fdr: 0.001
+  - label: SRX885698
+    algorithm: macs2
+    ip:
+    - SRX885698
+    control:
+    - SRX885699
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: SRX885698
+    algorithm: spp
+    ip:
+    - SRX885698
+    control:
+    - SRX885699
+    extra:
+      fdr: 0.001
+  - label: SRX495789
+    algorithm: macs2
+    ip:
+    - SRX495789
+    control:
+    - SRX495788
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: SRX495789
+    algorithm: spp
+    ip:
+    - SRX495789
+    control:
+    - SRX495788
+    extra:
+      fdr: 0.001
+  - label: SRX018630
+    algorithm: macs2
+    ip:
+    - SRX018630
+    control:
+    - SRX018628
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: SRX018630
+    algorithm: spp
+    ip:
+    - SRX018630
+    control:
+    - SRX018628
+    extra:
+      fdr: 0.001
+  - label: SRX885702
+    algorithm: macs2
+    ip:
+    - SRX885702
+    control:
+    - SRX885703
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: SRX885702
+    algorithm: spp
+    ip:
+    - SRX885702
+    control:
+    - SRX885703
+    extra:
+      fdr: 0.001
+  - label: ERX1403350
+    algorithm: macs2
+    ip:
+    - ERX1403350
+    control:
+    - ERX1403349
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: ERX1403350
+    algorithm: spp
+    ip:
+    - ERX1403350
+    control:
+    - ERX1403349
+    extra:
+      fdr: 0.001
+  - label: SRX160144
+    algorithm: macs2
+    ip:
+    - SRX160144
+    control:
+    - SRX160146
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: SRX160144
+    algorithm: spp
+    ip:
+    - SRX160144
+    control:
+    - SRX160146
+    extra:
+      fdr: 0.001
+  - label: SRX685461
+    algorithm: macs2
+    ip:
+    - SRX685461
+    control:
+    - SRX685465
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: SRX685461
+    algorithm: spp
+    ip:
+    - SRX685461
+    control:
+    - SRX685465
+    extra:
+      fdr: 0.001
+  - label: SRX495269
+    algorithm: macs2
+    ip:
+    - SRX495269
+    control:
+    - SRX495267
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: SRX495269
+    algorithm: spp
+    ip:
+    - SRX495269
+    control:
+    - SRX495267
+    extra:
+      fdr: 0.001
+  - label: SRX326971
+    algorithm: macs2
+    ip:
+    - SRX326971
+    control:
+    - SRX326969
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: SRX326971
+    algorithm: spp
+    ip:
+    - SRX326971
+    control:
+    - SRX326969
+    extra:
+      fdr: 0.001
+  - label: SRX193316
+    algorithm: macs2
+    ip:
+    - SRX193316
+    control:
+    - SRX193310
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: SRX193316
+    algorithm: spp
+    ip:
+    - SRX193316
+    control:
+    - SRX193310
+    extra:
+      fdr: 0.001
+  - label: SRX447393
+    algorithm: macs2
+    ip:
+    - SRX447393
+    control:
+    - SRX447394
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: SRX447393
+    algorithm: spp
+    ip:
+    - SRX447393
+    control:
+    - SRX447394
+    extra:
+      fdr: 0.001
+  - label: SRX326965
+    algorithm: macs2
+    ip:
+    - SRX326965
+    control:
+    - SRX326968
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: SRX326965
+    algorithm: spp
+    ip:
+    - SRX326965
+    control:
+    - SRX326968
+    extra:
+      fdr: 0.001
+  - label: SRX017462
+    algorithm: macs2
+    ip:
+    - SRX017462
+    control:
+    - SRX017464
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: SRX017462
+    algorithm: spp
+    ip:
+    - SRX017462
+    control:
+    - SRX017464
+    extra:
+      fdr: 0.001
+  - label: SRX447392
+    algorithm: macs2
+    ip:
+    - SRX447392
+    control:
+    - SRX447394
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: SRX447392
+    algorithm: spp
+    ip:
+    - SRX447392
+    control:
+    - SRX447394
+    extra:
+      fdr: 0.001
+  - label: SRX193315
+    algorithm: macs2
+    ip:
+    - SRX193315
+    control:
+    - SRX193310
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: SRX193315
+    algorithm: spp
+    ip:
+    - SRX193315
+    control:
+    - SRX193310
+    extra:
+      fdr: 0.001
+  - label: SRX191910
+    algorithm: macs2
+    ip:
+    - SRX191910
+    control:
+    - SRX191916
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: SRX191910
+    algorithm: spp
+    ip:
+    - SRX191910
+    control:
+    - SRX191916
+    extra:
+      fdr: 0.001
+  - label: ERX402112
+    algorithm: macs2
+    ip:
+    - ERX402112
+    control:
+    - ERX402113
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: ERX402112
+    algorithm: spp
+    ip:
+    - ERX402112
+    control:
+    - ERX402113
+    extra:
+      fdr: 0.001
+  - label: SRX1179573
+    algorithm: macs2
+    ip:
+    - SRX1179573
+    control:
+    - SRX1179571
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: SRX1179573
+    algorithm: spp
+    ip:
+    - SRX1179573
+    control:
+    - SRX1179571
+    extra:
+      fdr: 0.001
+  - label: SRX359797
+    algorithm: macs2
+    ip:
+    - SRX359797
+    control:
+    - SRX359796
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: SRX359797
+    algorithm: spp
+    ip:
+    - SRX359797
+    control:
+    - SRX359796
+    extra:
+      fdr: 0.001
+  - label: SRX511129
+    algorithm: macs2
+    ip:
+    - SRX511129
+    control:
+    - SRX511130
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: SRX511129
+    algorithm: spp
+    ip:
+    - SRX511129
+    control:
+    - SRX511130
+    extra:
+      fdr: 0.001
+  - label: SRX046658
+    algorithm: macs2
+    ip:
+    - SRX046658
+    control:
+    - SRX046656
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: SRX046658
+    algorithm: spp
+    ip:
+    - SRX046658
+    control:
+    - SRX046656
+    extra:
+      fdr: 0.001
+  - label: SRX149197
+    algorithm: macs2
+    ip:
+    - SRX149197
+    control:
+    - SRX149199
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: SRX149197
+    algorithm: spp
+    ip:
+    - SRX149197
+    control:
+    - SRX149199
+    extra:
+      fdr: 0.001
+  - label: ERX242706
+    algorithm: macs2
+    ip:
+    - ERX242706
+    control:
+    - ERX242710
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: ERX242706
+    algorithm: spp
+    ip:
+    - ERX242706
+    control:
+    - ERX242710
+    extra:
+      fdr: 0.001
+  - label: SRX1433400
+    algorithm: macs2
+    ip:
+    - SRX1433400
+    control:
+    - SRX1433394
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: SRX1433400
+    algorithm: spp
+    ip:
+    - SRX1433400
+    control:
+    - SRX1433394
+    extra:
+      fdr: 0.001
+  - label: ERX242709
+    algorithm: macs2
+    ip:
+    - ERX242709
+    control:
+    - ERX242723
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: ERX242709
+    algorithm: spp
+    ip:
+    - ERX242709
+    control:
+    - ERX242723
+    extra:
+      fdr: 0.001
+  - label: ERX402138
+    algorithm: macs2
+    ip:
+    - ERX402138
+    control:
+    - ERX402113
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: ERX402138
+    algorithm: spp
+    ip:
+    - ERX402138
+    control:
+    - ERX402113
+    extra:
+      fdr: 0.001
+  - label: SRX101814
+    algorithm: macs2
+    ip:
+    - SRX101814
+    control:
+    - SRX101815
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: SRX101814
+    algorithm: spp
+    ip:
+    - SRX101814
+    control:
+    - SRX101815
+    extra:
+      fdr: 0.001
+  - label: SRX193330
+    algorithm: macs2
+    ip:
+    - SRX193330
+    control:
+    - SRX193327
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: SRX193330
+    algorithm: spp
+    ip:
+    - SRX193330
+    control:
+    - SRX193327
+    extra:
+      fdr: 0.001
+  - label: SRX2172428
+    algorithm: macs2
+    ip:
+    - SRX2172428
+    control:
+    - SRX2172424
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: SRX2172428
+    algorithm: spp
+    ip:
+    - SRX2172428
+    control:
+    - SRX2172424
+    extra:
+      fdr: 0.001
+  - label: SRX191911
+    algorithm: macs2
+    ip:
+    - SRX191911
+    control:
+    - SRX191915
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: SRX191911
+    algorithm: spp
+    ip:
+    - SRX191911
+    control:
+    - SRX191915
+    extra:
+      fdr: 0.001
+  - label: ERX088873
+    algorithm: macs2
+    ip:
+    - ERX088873
+    control:
+    - ERX088871
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: ERX088873
+    algorithm: spp
+    ip:
+    - ERX088873
+    control:
+    - ERX088871
+    extra:
+      fdr: 0.001
+  - label: SRX306199
+    algorithm: macs2
+    ip:
+    - SRX306199
+    control:
+    - SRX306200
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: SRX306199
+    algorithm: spp
+    ip:
+    - SRX306199
+    control:
+    - SRX306200
+    extra:
+      fdr: 0.001
+  - label: SRX193317
+    algorithm: macs2
+    ip:
+    - SRX193317
+    control:
+    - SRX193312
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: SRX193317
+    algorithm: spp
+    ip:
+    - SRX193317
+    control:
+    - SRX193312
+    extra:
+      fdr: 0.001
+  - label: SRX1389388
+    algorithm: macs2
+    ip:
+    - SRX1389388
+    control:
+    - SRX1389386
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: SRX1389388
+    algorithm: spp
+    ip:
+    - SRX1389388
+    control:
+    - SRX1389386
+    extra:
+      fdr: 0.001
+  - label: SRX2172427
+    algorithm: macs2
+    ip:
+    - SRX2172427
+    control:
+    - SRX2172426
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: SRX2172427
+    algorithm: spp
+    ip:
+    - SRX2172427
+    control:
+    - SRX2172426
+    extra:
+      fdr: 0.001
+  - label: SRX149190
+    algorithm: macs2
+    ip:
+    - SRX149190
+    control:
+    - SRX149194
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: SRX149190
+    algorithm: spp
+    ip:
+    - SRX149190
+    control:
+    - SRX149194
+    extra:
+      fdr: 0.001
+  - label: ERX242718
+    algorithm: macs2
+    ip:
+    - ERX242718
+    control:
+    - ERX242722
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: ERX242718
+    algorithm: spp
+    ip:
+    - ERX242718
+    control:
+    - ERX242722
+    extra:
+      fdr: 0.001
+  - label: SRX273675
+    algorithm: macs2
+    ip:
+    - SRX273675
+    control:
+    - SRX273673
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: SRX273675
+    algorithm: spp
+    ip:
+    - SRX273675
+    control:
+    - SRX273673
+    extra:
+      fdr: 0.001
+  - label: SRX2055949
+    algorithm: macs2
+    ip:
+    - SRX2055949
+    control:
+    - SRX2055950
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: SRX2055949
+    algorithm: spp
+    ip:
+    - SRX2055949
+    control:
+    - SRX2055950
+    extra:
+      fdr: 0.001
+  - label: SRX018629
+    algorithm: macs2
+    ip:
+    - SRX018629
+    control:
+    - SRX018628
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: SRX018629
+    algorithm: spp
+    ip:
+    - SRX018629
+    control:
+    - SRX018628
+    extra:
+      fdr: 0.001
+  - label: SRX271404
+    algorithm: macs2
+    ip:
+    - SRX271404
+    control:
+    - SRX271405
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: SRX271404
+    algorithm: spp
+    ip:
+    - SRX271404
+    control:
+    - SRX271405
+    extra:
+      fdr: 0.001
+  - label: SRX907136
+    algorithm: macs2
+    ip:
+    - SRX907136
+    control:
+    - SRX907134
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: SRX907136
+    algorithm: spp
+    ip:
+    - SRX907136
+    control:
+    - SRX907134
+    extra:
+      fdr: 0.001
+aligner:
+  index: 'bowtie2'
+  tag: 'r6-16'
+gtf:
+  tag: 'r6-16'
+
+# references has the structure:
+#
+#   assembly:           [ used as top-level dir for references ]
+#     tag:              [ user-defined; often indicates version or release ]
+#       type:           [ must be either "gtf" or "fasta" ]
+#         url:          [ string or list of urls ]
+#         postprocess:  [ string of importable function or dict of function and args ]
+#         conversions:  [ list of gtf conversions; only if type == gtf ]
+#         indexes:      [ list of indexes to build; only if type == fasta ]
+
+references:
+  dmel:
+    test:
+      fasta:
+        url: "https://raw.githubusercontent.com/lcdb/lcdb-test-data/add-chipseq/data/seq/dm6.small.fa"
+        postprocess: 'lib.common.gzipped'
+        indexes:
+        - 'bowtie2'
+    r6-16:
+      gtf:
+        url: 'ftp://ftp.flybase.net/genomes/Drosophila_melanogaster/dmel_r6.16_FB2017_03/gtf/dmel-all-r6.16.gtf.gz'
+        postprocess: "lib.postprocess.dm6.gtf_postprocess"
+        conversions:
+        - 'refflat'
+        - gffutils:   # kwargs below will be provided to `gffutils.create_db`
+            merge_strategy: 'merge'
+            id_spec:
+              transcript: ['transcript_id', 'transcript_symbol']
+              gene: ['gene_id', 'gene_symbol']
+            gtf_transcript_key: 'transcript_id'
+            gtf_gene_key: 'gene_id'
+            disable_infer_genes: true
+
+          # the attribute from the GTF to consider gene ID
+        - genelist:
+            gene_id: 'gene_id'
+
+        - annotation_hub:
+            ahkey: 'AH49581'
+            keytype: 'ENSEMBL'
+
+      fb_annotation:
+        url: 'ftp://ftp.flybase.net/releases/FB2017_03/precomputed_files/genes/fbgn_annotation_ID.tsv.gz'
+        postprocess: "lib.postprocess.dm6.fb_annotation_postprocess"
+
+      fb_synonym:
+        url: 'ftp://ftp.flybase.net/releases/FB2017_03/precomputed_files/synonyms/fb_synonym_fb_2017_03.tsv.gz'
+        postprocess: "lib.postprocess.dm6.fb_synonym_postprocess"
+
+      fasta:
+        url: 'ftp://ftp.flybase.net/genomes/Drosophila_melanogaster/dmel_r6.16_FB2017_03/fasta/dmel-all-chromosome-r6.16.fasta.gz'
+        postprocess: "lib.postprocess.dm6.fasta_postprocess"
+        indexes:
+        - 'bowtie2'
+        - 'hisat2'
+  phix:
+    default:
+      fasta:
+        url: 'ftp://igenome:G3nom3s4u@ussd-ftp.illumina.com/PhiX/Illumina/RTA/PhiX_Illumina_RTA.tar.gz'
+        postprocess: "lib.postprocess.phix.fasta_postprocess"
+        indexes:
+        - 'bowtie2'
