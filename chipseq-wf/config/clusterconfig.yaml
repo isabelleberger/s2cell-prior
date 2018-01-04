@@ -18,3 +18,6 @@ bigwig_pos:
 
 macs2:
   prefix: "--gres=lscratch:20 --mem=16g"
+
+spp:
+  prefix: "--gres=lscratch:20 --time=4:00:00 --mem=16g"

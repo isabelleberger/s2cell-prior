@@ -79,7 +79,7 @@ rule cutadapt:
     log:
         c.patterns['cutadapt'] + '.log'
     params:
-        extra='-a file:../lcdb-wf/include/adapters.fa -q 20 --minimum-length=25'
+        extra='-a file:../lcdb-wf/include/adapters.fa -q 20 --minimum-length=50'
     wrapper:
         wrapper_for('cutadapt')
 
@@ -207,7 +207,19 @@ rule libsizes_table:
         df['stage'] = df.filename.apply(stage)
         df = df.set_index('filename')
         df = df.pivot('sample', columns='stage', values='million')
-        df.to_csv(output.tsv, sep='\t')
+
+        # make nicer column names
+        convert = {
+            'fastq.libsize': 'stage1_raw',
+            'cutadapt.fastq.libsize' : 'stage2_trimmed',
+            'cutadapt.bam.libsize': 'stage3_aligned',
+            'cutadapt.unique.bam.libsize': 'stage4_unique',
+            'cutadapt.unique.nodups.bam.libsize': 'stage5_nodups',
+        }
+
+        df.columns = [convert[i] for i in df.columns]  
+
+	df.to_csv(output.tsv, sep='\t')
         y = {
             'id': 'libsizes_table',
             'section_name': 'Library sizes',
@@ -235,13 +247,15 @@ rule multiqc:
             utils.flatten(c.targets['cutadapt']) +
             utils.flatten(c.targets['bam']) +
             utils.flatten(c.targets['markduplicates']) +
+            utils.flatten(c.targets['fingerprint']) +
+            utils.flatten(c.targets['peaks']) +
             utils.flatten(c.targets['fastq_screen'])
         ),
         config='config/multiqc_config.yaml'
     output:
         c.targets['multiqc']
     params:
-        analysis_directory=" ".join([c.sample_dir, c.agg_dir]),
+        analysis_directory=" ".join([c.sample_dir, c.agg_dir, c.peak_calling]),
         extra='--config config/multiqc_config.yaml',
         outdir=os.path.dirname(c.targets['multiqc'][0]),
         basename=os.path.basename(c.targets['multiqc'][0])
@@ -272,9 +286,9 @@ rule markduplicates:
         c.patterns['markduplicates']['bam'] + '.log'
     params:
         # TEST SETTINGS:
-        # You may want to use something larger, like "-Xmx32g" for real-world
+        # You may want to use something larger, like "-Xmx24g" for real-world
         # usage.
-        java_args='-Xmx10g'
+        java_args='-Xmx24g'
     shell:
         'picard '
         '{params.java_args} '
@@ -304,6 +318,11 @@ rule merge_techreps:
         metrics=c.patterns['merged_techreps'] + '.metrics'
     log:
         c.patterns['merged_techreps'] + '.log'
+    params:
+        # TEST SETTINGS:
+        # You may want to use something larger, like "-Xmx24g" for real-world
+        # usage.
+        java_args='-Xmx24g'
     wrapper:
         wrapper_for('combos/merge_and_dedup')
 
@@ -355,7 +374,7 @@ rule fingerprint:
         plot=c.patterns['fingerprint']['plot'],
         raw_counts=c.patterns['fingerprint']['raw_counts'],
         metrics=c.patterns['fingerprint']['metrics']
-    threads: 4
+    threads: 8
     params:
         # Note: I think the extra complexity of the function is worth the
         # nicely-labeled plots.
@@ -374,11 +393,11 @@ rule fingerprint:
         '--outQualityMetrics {output.metrics} '
         '--outRawCounts {output.raw_counts} '
         '--plotFile {output.plot} '
-        # TEST SETTINGS:You'll probably want to change --numberOfSamples to
+        # TEST SETTINGS: You'll probably want to change --numberOfSamples to
         # something higher (default is 500k) when running on real data
         '--numberOfSamples 500000 '
-        '&> {log}'
-
+        '&> {log} '
+        '&& sed -i "s/NA/0.0/g" {output.metrics} '
 
 rule macs2:
     """
@@ -433,7 +452,7 @@ rule spp:
         c.patterns['peaks']['spp'] + '.log'
     params:
         block=lambda wc: chipseq.block_for_run(config, wc.spp_run, 'spp'),
-        java_args='-Xmx8g',
+        java_args='-Xmx24g',
         keep_tempfiles=False
     threads: 2
     wrapper:
