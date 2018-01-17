@@ -261,22 +261,7 @@ chipseq:
     - SRX359796
     extra:
       fdr: 0.001
-  - label: SRX326969
-    algorithm: macs2
-    ip:
-    - SRX326969
-    control:
-    - SRX326969
-    extra: '-g dm --bdg --nomodel --extsize 147'
-  - label: SRX326969
-    algorithm: spp
-    ip:
-    - SRX326969
-    control:
-    - SRX326969
-    extra:
-      fdr: 0.001
-  - label: SRX2055947
+ - label: SRX2055947
     algorithm: macs2
     ip:
     - SRX2055947
