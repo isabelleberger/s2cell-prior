@@ -1,0 +1,536 @@
+# sampletable: TSV file defining sample metadata.
+#
+# First column must have header name "samplename".
+sampletable: 'config/sampletable_all.tsv'
+
+# sample_dir: directory in which each sample is expected to have its own
+# directory and fastq file[s]. If `sampletable` lists a sample with samplename
+# SAMPLE1, then at least the file $sample_dir/SAMPLE1/SAMPLE1_R1.fastq.gz is
+# expected.
+sample_dir: 'data/chipseq_samples'
+
+# Directory to contain reports and other aggregations
+aggregation_dir: 'data/chipseq_aggregation'
+
+# Directory in which merged technical replicates will be stored
+merged_dir: 'data/chipseq_merged'
+
+# Which key in the `references` dict below to use
+assembly: 'dmel'
+
+# If not specified here, use the environment variable REFERENCES_DIR.
+references_dir: '/data/LCDB/lcdb-references'
+
+peaks_dir: 'data/chipseq_peaks'
+
+
+chipseq:
+  # The peak_calling section is a list of dicts, each one defining a single
+  # chipseq peak-calling run. The output will be created according to `label`
+  # and `algorithm`. There will be at least a file
+  # `<peaks_dir>/<algorithm>/<label>/peaks.bed`; other files may be created
+  # depending on the algorithm.
+  #
+  # Note that this directory structure means you can have the same label for
+  # different peak-callers to more easily compare them.
+  #
+  # The `ip` and `control` sections expect names found in the "label" column of
+  # the sampletable. This column describes the technical replicates, and the
+  # merging step of the workflow merges and de-dupes appropriately so that the
+  # peak callers only see BAMs with all duplicates removed.
+  #
+  # The "extra" block is used to pass extra information to the peak-caller in
+  # a run-specific manner. Check the wrapper README for details on this. For
+  # example, the macs2 wrapper passes `extra` verbatim to the command line, but
+  # the spp wrapper handles things differently.
+  #
+  # Each wrapper is built to accept either single or multiple BAMs and output
+  # at least a BED file of peaks.
+  #
+  peak_calling:
+  - label: SRX1433399
+    algorithm: spp
+    ip:
+    - SRX1433399
+    control:
+    - SRX1433393
+    extra:
+      fdr: 0.1
+  - label: SRX018629
+    algorithm: spp
+    ip:
+    - SRX018629
+    control:
+    - SRX018628
+    extra:
+      fdr: 0.1
+  - label: SRX883604
+    algorithm: spp
+    ip:
+    - SRX883604
+    control:
+    - SRX883600
+    extra:
+      fdr: 0.1
+  - label: SRX1179572
+    algorithm: spp
+    ip:
+    - SRX1179572
+    control:
+    - SRX1179571
+    extra:
+      fdr: 0.1
+  - label: SRX330270
+    algorithm: spp
+    ip:
+    - SRX330270
+    control:
+    - SRX330271
+    extra:
+      fdr: 0.1
+  - label: SRX1433397
+    algorithm: spp
+    ip:
+    - SRX1433397
+    control:
+    - SRX1433391
+    extra:
+      fdr: 0.1
+  - label: SRX885700
+    algorithm: spp
+    ip:
+    - SRX885700
+    control:
+    - SRX885701
+    extra:
+      fdr: 0.1
+  - label: SRX1433400
+    algorithm: spp
+    ip:
+    - SRX1433400
+    control:
+    - SRX1433394
+    extra:
+      fdr: 0.1
+  - label: SRX1433401
+    algorithm: spp
+    ip:
+    - SRX1433401
+    control:
+    - SRX1433395
+    extra:
+      fdr: 0.1
+  - label: SRX018631
+    algorithm: spp
+    ip:
+    - SRX018631
+    control:
+    - SRX018628
+    extra:
+      fdr: 0.1
+  - label: SRX097620
+    algorithm: spp
+    ip:
+    - SRX097620
+    control:
+    - SRX097621
+    extra:
+      fdr: 0.1
+  - label: SRX2055945
+    algorithm: spp
+    ip:
+    - SRX2055945
+    control:
+    - SRX2055946
+    extra:
+      fdr: 0.1
+  - label: SRX2055964
+    algorithm: spp
+    ip:
+    - SRX2055964
+    control:
+    - SRX2055965
+    extra:
+      fdr: 0.1
+  - label: SRX2055958
+    algorithm: spp
+    ip:
+    - SRX2055958
+    control:
+    - SRX2055960
+    extra:
+      fdr: 0.1
+  - label: ERX402112
+    algorithm: spp
+    ip:
+    - ERX402112
+    control:
+    - ERX402113
+    extra:
+      fdr: 0.1
+  - label: SRX018630
+    algorithm: spp
+    ip:
+    - SRX018630
+    control:
+    - SRX018628
+    extra:
+      fdr: 0.1
+  - label: SRX1389388
+    algorithm: spp
+    ip:
+    - SRX1389388
+    control:
+    - SRX1389386
+    extra:
+      fdr: 0.1
+  - label: SRX885698
+    algorithm: spp
+    ip:
+    - SRX885698
+    control:
+    - SRX885699
+    extra:
+      fdr: 0.1
+  - label: SRX1179573
+    algorithm: spp
+    ip:
+    - SRX1179573
+    control:
+    - SRX1179571
+    extra:
+      fdr: 0.1
+  - label: ERX402137
+    algorithm: spp
+    ip:
+    - ERX402137
+    control:
+    - ERX402113
+    extra:
+      fdr: 0.1
+  - label: SRX330269
+    algorithm: spp
+    ip:
+    - SRX330269
+    control:
+    - SRX330271
+    extra:
+      fdr: 0.1
+  - label: SRX018632
+    algorithm: spp
+    ip:
+    - SRX018632
+    control:
+    - SRX018628
+    extra:
+      fdr: 0.1
+  - label: SRX883605
+    algorithm: spp
+    ip:
+    - SRX883605
+    control:
+    - SRX883601
+    extra:
+      fdr: 0.1
+  - label: SRX306196
+    algorithm: spp
+    ip:
+    - SRX306196
+    control:
+    - SRX306198
+    extra:
+      fdr: 0.1
+  - label: SRX306190
+    algorithm: spp
+    ip:
+    - SRX306190
+    control:
+    - SRX306192
+    extra:
+      fdr: 0.1
+  - label: ERX402133
+    algorithm: spp
+    ip:
+    - ERX402133
+    control:
+    - ERX402102
+    extra:
+      fdr: 0.1
+  - label: ERX1403350
+    algorithm: spp
+    ip:
+    - ERX1403350
+    control:
+    - ERX1403349
+    extra:
+      fdr: 0.1
+  - label: SRX306193
+    algorithm: spp
+    ip:
+    - SRX306193
+    control:
+    - SRX306195
+    extra:
+      fdr: 0.1
+  - label: SRX495270
+    algorithm: spp
+    ip:
+    - SRX495270
+    control:
+    - SRX495268
+    extra:
+      fdr: 0.1
+  - label: SRX1389384
+    algorithm: spp
+    ip:
+    - SRX1389384
+    control:
+    - SRX1389383
+    extra:
+      fdr: 0.1
+  - label: SRX495269
+    algorithm: spp
+    ip:
+    - SRX495269
+    control:
+    - SRX495267
+    extra:
+      fdr: 0.1
+  - label: SRX149189
+    algorithm: spp
+    ip:
+    - SRX149189
+    control:
+    - SRX149193
+    extra:
+      fdr: 0.1
+  - label: ERX402108
+    algorithm: spp
+    ip:
+    - ERX402108
+    control:
+    - ERX402102
+    extra:
+      fdr: 0.1
+  - label: SRX359798
+    algorithm: spp
+    ip:
+    - SRX359798
+    control:
+    - SRX359796
+    extra:
+      fdr: 0.1
+  - label: SRX2055961
+    algorithm: spp
+    ip:
+    - SRX2055961
+    control:
+    - SRX2055963
+    extra:
+      fdr: 0.1
+  - label: SRX326970
+    algorithm: spp
+    ip:
+    - SRX326970
+    control:
+    - SRX326969
+    extra:
+      fdr: 0.1
+  - label: SRX447393
+    algorithm: spp
+    ip:
+    - SRX447393
+    control:
+    - SRX447394
+    extra:
+      fdr: 0.1
+  - label: SRX359797
+    algorithm: spp
+    ip:
+    - SRX359797
+    control:
+    - SRX359796
+    extra:
+      fdr: 0.1
+  - label: ERX402138
+    algorithm: spp
+    ip:
+    - ERX402138
+    control:
+    - ERX402113
+    extra:
+      fdr: 0.1
+  - label: SRX495789
+    algorithm: spp
+    ip:
+    - SRX495789
+    control:
+    - SRX495788
+    extra:
+      fdr: 0.1
+  - label: SRX885702
+    algorithm: spp
+    ip:
+    - SRX885702
+    control:
+    - SRX885703
+    extra:
+      fdr: 0.1
+  - label: SRX2055953
+    algorithm: spp
+    ip:
+    - SRX2055953
+    control:
+    - SRX2055954
+    extra:
+      fdr: 0.1
+  - label: SRX054533
+    algorithm: spp
+    ip:
+    - SRX054533
+    control:
+    - SRX054534
+    extra:
+      fdr: 0.1
+  - label: SRX2055966
+    algorithm: spp
+    ip:
+    - SRX2055966
+    control:
+    - SRX2055967
+    extra:
+      fdr: 0.1
+  - label: ERX402114
+    algorithm: spp
+    ip:
+    - ERX402114
+    control:
+    - ERX402113
+    extra:
+      fdr: 0.1
+  - label: SRX2055944
+    algorithm: spp
+    ip:
+    - SRX2055944
+    control:
+    - SRX2055946
+    extra:
+      fdr: 0.1
+  - label: SRX149192
+    algorithm: spp
+    ip:
+    - SRX149192
+    control:
+    - SRX149196
+    extra:
+      fdr: 0.1
+  - label: SRX1389387
+    algorithm: spp
+    ip:
+    - SRX1389387
+    control:
+    - SRX1389386
+    extra:
+      fdr: 0.1
+  - label: SRX495277
+    algorithm: macs2
+    ip:
+    - SRX495277
+    control:
+    - SRX495275
+    extra: '-g dm --bdg --nomodel --extsize 589'
+  - label: SRX495290
+    algorithm: macs2
+    ip:
+    - SRX495290
+    control:
+    - SRX495288
+    extra: '-g dm --bdg --nomodel --extsize 589'
+  - label: SRX495278
+    algorithm: macs2
+    ip:
+    - SRX495278
+    control:
+    - SRX495276
+    extra: '-g dm --bdg --nomodel --extsize 589'
+  - label: SRX495289
+    algorithm: macs2
+    ip:
+    - SRX495289
+    control:
+    - SRX495287
+    extra: '-g dm --bdg --nomodel --extsize 589'
+aligner:
+  index: 'bowtie2'
+  tag: 'r6-16'
+gtf:
+  tag: 'r6-16'
+
+# references has the structure:
+#
+#   assembly:           [ used as top-level dir for references ]
+#     tag:              [ user-defined; often indicates version or release ]
+#       type:           [ must be either "gtf" or "fasta" ]
+#         url:          [ string or list of urls ]
+#         postprocess:  [ string of importable function or dict of function and args ]
+#         conversions:  [ list of gtf conversions; only if type == gtf ]
+#         indexes:      [ list of indexes to build; only if type == fasta ]
+
+references:
+  dmel:
+    test:
+      fasta:
+        url: "https://raw.githubusercontent.com/lcdb/lcdb-test-data/add-chipseq/data/seq/dm6.small.fa"
+        postprocess: 'lib.common.gzipped'
+        indexes:
+        - 'bowtie2'
+    r6-16:
+      gtf:
+        url: 'ftp://ftp.flybase.net/genomes/Drosophila_melanogaster/dmel_r6.16_FB2017_03/gtf/dmel-all-r6.16.gtf.gz'
+        postprocess: "lib.postprocess.dm6.gtf_postprocess"
+        conversions:
+        - 'refflat'
+        - gffutils:   # kwargs below will be provided to `gffutils.create_db`
+            merge_strategy: 'merge'
+            id_spec:
+              transcript: ['transcript_id', 'transcript_symbol']
+              gene: ['gene_id', 'gene_symbol']
+            gtf_transcript_key: 'transcript_id'
+            gtf_gene_key: 'gene_id'
+            disable_infer_genes: true
+
+        
+          # the attribute from the GTF to consider gene ID
+        - genelist:
+            gene_id: 'gene_id'
+        
+
+          
+        - annotation_hub:
+            ahkey: 'AH49581'
+            keytype: 'ENSEMBL'
+
+      
+      fb_annotation:
+        url: 'ftp://ftp.flybase.net/releases/FB2017_03/precomputed_files/genes/fbgn_annotation_ID.tsv.gz'
+        postprocess: "lib.postprocess.dm6.fb_annotation_postprocess"
+
+      
+      fb_synonym:
+        url: 'ftp://ftp.flybase.net/releases/FB2017_03/precomputed_files/synonyms/fb_synonym_fb_2017_03.tsv.gz'
+        postprocess: "lib.postprocess.dm6.fb_synonym_postprocess"
+
+      
+      fasta:
+        url: 'ftp://ftp.flybase.net/genomes/Drosophila_melanogaster/dmel_r6.16_FB2017_03/fasta/dmel-all-chromosome-r6.16.fasta.gz'
+        postprocess: "lib.postprocess.dm6.fasta_postprocess"
+        indexes:
+        - 'bowtie2'
+        - 'hisat2'
+  phix:
+    default:
+      fasta:
+        url: 'ftp://igenome:G3nom3s4u@ussd-ftp.illumina.com/PhiX/Illumina/RTA/PhiX_Illumina_RTA.tar.gz'
+        postprocess: "lib.postprocess.phix.fasta_postprocess"
+        indexes:
+        - 'bowtie2'
