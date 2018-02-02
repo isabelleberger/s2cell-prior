@@ -48,260 +48,12 @@ chipseq:
   # at least a BED file of peaks.
   #
   peak_calling:
-  - label: SRX1433399
-    algorithm: spp
-    ip:
-    - SRX1433399
-    control:
-    - SRX1433393
-    extra:
-      fdr: 0.1
-  - label: SRX018629
-    algorithm: spp
-    ip:
-    - SRX018629
-    control:
-    - SRX018628
-    extra:
-      fdr: 0.1
-  - label: SRX883604
-    algorithm: spp
-    ip:
-    - SRX883604
-    control:
-    - SRX883600
-    extra:
-      fdr: 0.1
-  - label: SRX1179572
-    algorithm: spp
-    ip:
-    - SRX1179572
-    control:
-    - SRX1179571
-    extra:
-      fdr: 0.1
-  - label: SRX330270
-    algorithm: spp
-    ip:
-    - SRX330270
-    control:
-    - SRX330271
-    extra:
-      fdr: 0.1
-  - label: SRX1433397
-    algorithm: spp
-    ip:
-    - SRX1433397
-    control:
-    - SRX1433391
-    extra:
-      fdr: 0.1
-  - label: SRX885700
-    algorithm: spp
-    ip:
-    - SRX885700
-    control:
-    - SRX885701
-    extra:
-      fdr: 0.1
-  - label: SRX1433400
-    algorithm: spp
-    ip:
-    - SRX1433400
-    control:
-    - SRX1433394
-    extra:
-      fdr: 0.1
-  - label: SRX1433401
-    algorithm: spp
-    ip:
-    - SRX1433401
-    control:
-    - SRX1433395
-    extra:
-      fdr: 0.1
-  - label: SRX018631
-    algorithm: spp
-    ip:
-    - SRX018631
-    control:
-    - SRX018628
-    extra:
-      fdr: 0.1
-  - label: SRX097620
-    algorithm: spp
-    ip:
-    - SRX097620
-    control:
-    - SRX097621
-    extra:
-      fdr: 0.1
-  - label: SRX2055945
-    algorithm: spp
-    ip:
-    - SRX2055945
-    control:
-    - SRX2055946
-    extra:
-      fdr: 0.1
-  - label: SRX2055964
-    algorithm: spp
-    ip:
-    - SRX2055964
-    control:
-    - SRX2055965
-    extra:
-      fdr: 0.1
-  - label: SRX2055958
-    algorithm: spp
-    ip:
-    - SRX2055958
-    control:
-    - SRX2055960
-    extra:
-      fdr: 0.1
-  - label: ERX402112
-    algorithm: spp
-    ip:
-    - ERX402112
-    control:
-    - ERX402113
-    extra:
-      fdr: 0.1
-  - label: SRX018630
-    algorithm: spp
-    ip:
-    - SRX018630
-    control:
-    - SRX018628
-    extra:
-      fdr: 0.1
-  - label: SRX1389388
-    algorithm: spp
-    ip:
-    - SRX1389388
-    control:
-    - SRX1389386
-    extra:
-      fdr: 0.1
-  - label: SRX885698
-    algorithm: spp
-    ip:
-    - SRX885698
-    control:
-    - SRX885699
-    extra:
-      fdr: 0.1
-  - label: SRX1179573
-    algorithm: spp
-    ip:
-    - SRX1179573
-    control:
-    - SRX1179571
-    extra:
-      fdr: 0.1
-  - label: ERX402137
-    algorithm: spp
-    ip:
-    - ERX402137
-    control:
-    - ERX402113
-    extra:
-      fdr: 0.1
-  - label: SRX330269
-    algorithm: spp
-    ip:
-    - SRX330269
-    control:
-    - SRX330271
-    extra:
-      fdr: 0.1
-  - label: SRX018632
-    algorithm: spp
-    ip:
-    - SRX018632
-    control:
-    - SRX018628
-    extra:
-      fdr: 0.1
-  - label: SRX883605
-    algorithm: spp
-    ip:
-    - SRX883605
-    control:
-    - SRX883601
-    extra:
-      fdr: 0.1
-  - label: SRX306196
-    algorithm: spp
-    ip:
-    - SRX306196
-    control:
-    - SRX306198
-    extra:
-      fdr: 0.1
   - label: SRX306190
     algorithm: spp
     ip:
     - SRX306190
     control:
     - SRX306192
-    extra:
-      fdr: 0.1
-  - label: ERX402133
-    algorithm: spp
-    ip:
-    - ERX402133
-    control:
-    - ERX402102
-    extra:
-      fdr: 0.1
-  - label: ERX1403350
-    algorithm: spp
-    ip:
-    - ERX1403350
-    control:
-    - ERX1403349
-    extra:
-      fdr: 0.1
-  - label: SRX306193
-    algorithm: spp
-    ip:
-    - SRX306193
-    control:
-    - SRX306195
-    extra:
-      fdr: 0.1
-  - label: SRX495270
-    algorithm: spp
-    ip:
-    - SRX495270
-    control:
-    - SRX495268
-    extra:
-      fdr: 0.1
-  - label: SRX1389384
-    algorithm: spp
-    ip:
-    - SRX1389384
-    control:
-    - SRX1389383
-    extra:
-      fdr: 0.1
-  - label: SRX495269
-    algorithm: spp
-    ip:
-    - SRX495269
-    control:
-    - SRX495267
-    extra:
-      fdr: 0.1
-  - label: SRX149189
-    algorithm: spp
-    ip:
-    - SRX149189
-    control:
-    - SRX149193
     extra:
       fdr: 0.1
   - label: ERX402108
@@ -312,76 +64,20 @@ chipseq:
     - ERX402102
     extra:
       fdr: 0.1
-  - label: SRX359798
+  - label: ERX402133
     algorithm: spp
     ip:
-    - SRX359798
+    - ERX402133
     control:
-    - SRX359796
+    - ERX402102
     extra:
       fdr: 0.1
-  - label: SRX2055961
+  - label: SRX1389384
     algorithm: spp
     ip:
-    - SRX2055961
+    - SRX1389384
     control:
-    - SRX2055963
-    extra:
-      fdr: 0.1
-  - label: SRX326970
-    algorithm: spp
-    ip:
-    - SRX326970
-    control:
-    - SRX326969
-    extra:
-      fdr: 0.1
-  - label: SRX447393
-    algorithm: spp
-    ip:
-    - SRX447393
-    control:
-    - SRX447394
-    extra:
-      fdr: 0.1
-  - label: SRX359797
-    algorithm: spp
-    ip:
-    - SRX359797
-    control:
-    - SRX359796
-    extra:
-      fdr: 0.1
-  - label: ERX402138
-    algorithm: spp
-    ip:
-    - ERX402138
-    control:
-    - ERX402113
-    extra:
-      fdr: 0.1
-  - label: SRX495789
-    algorithm: spp
-    ip:
-    - SRX495789
-    control:
-    - SRX495788
-    extra:
-      fdr: 0.1
-  - label: SRX885702
-    algorithm: spp
-    ip:
-    - SRX885702
-    control:
-    - SRX885703
-    extra:
-      fdr: 0.1
-  - label: SRX2055953
-    algorithm: spp
-    ip:
-    - SRX2055953
-    control:
-    - SRX2055954
+    - SRX1389383
     extra:
       fdr: 0.1
   - label: SRX054533
@@ -392,36 +88,92 @@ chipseq:
     - SRX054534
     extra:
       fdr: 0.1
-  - label: SRX2055966
+  - label: SRX447393
     algorithm: spp
     ip:
-    - SRX2055966
+    - SRX447393
     control:
-    - SRX2055967
+    - SRX447394
     extra:
       fdr: 0.1
-  - label: ERX402114
+  - label: SRX1389388
     algorithm: spp
     ip:
-    - ERX402114
+    - SRX1389388
+    control:
+    - SRX1389386
+    extra:
+      fdr: 0.1
+  - label: SRX495269
+    algorithm: spp
+    ip:
+    - SRX495269
+    control:
+    - SRX495267
+    extra:
+      fdr: 0.1
+  - label: SRX018631
+    algorithm: spp
+    ip:
+    - SRX018631
+    control:
+    - SRX018628
+    extra:
+      fdr: 0.1
+  - label: SRX1433401
+    algorithm: spp
+    ip:
+    - SRX1433401
+    control:
+    - SRX1433395
+    extra:
+      fdr: 0.1
+  - label: ERX402112
+    algorithm: spp
+    ip:
+    - ERX402112
     control:
     - ERX402113
     extra:
       fdr: 0.1
-  - label: SRX2055944
+  - label: SRX1179573
     algorithm: spp
     ip:
-    - SRX2055944
+    - SRX1179573
+    control:
+    - SRX1179571
+    extra:
+      fdr: 0.1
+  - label: SRX306196
+    algorithm: spp
+    ip:
+    - SRX306196
+    control:
+    - SRX306198
+    extra:
+      fdr: 0.1
+  - label: SRX495270
+    algorithm: spp
+    ip:
+    - SRX495270
+    control:
+    - SRX495268
+    extra:
+      fdr: 0.1
+  - label: SRX2055945
+    algorithm: spp
+    ip:
+    - SRX2055945
     control:
     - SRX2055946
     extra:
       fdr: 0.1
-  - label: SRX149192
+  - label: SRX883604
     algorithm: spp
     ip:
-    - SRX149192
+    - SRX883604
     control:
-    - SRX149196
+    - SRX883600
     extra:
       fdr: 0.1
   - label: SRX1389387
@@ -432,6 +184,261 @@ chipseq:
     - SRX1389386
     extra:
       fdr: 0.1
+  - label: SRX018629
+    algorithm: spp
+    ip:
+    - SRX018629
+    control:
+    - SRX018628
+    extra:
+      fdr: 0.1
+  - label: SRX2055966
+    algorithm: spp
+    ip:
+    - SRX2055966
+    control:
+    - SRX2055967
+    extra:
+      fdr: 0.1
+  - label: SRX1433399
+    algorithm: spp
+    ip:
+    - SRX1433399
+    control:
+    - SRX1433393
+    extra:
+      fdr: 0.1
+  - label: SRX2055958
+    algorithm: spp
+    ip:
+    - SRX2055958
+    control:
+    - SRX2055960
+    extra:
+      fdr: 0.1
+  - label: SRX885698
+    algorithm: spp
+    ip:
+    - SRX885698
+    control:
+    - SRX885699
+    extra:
+      fdr: 0.1
+  - label: SRX2055961
+    algorithm: spp
+    ip:
+    - SRX2055961
+    control:
+    - SRX2055963
+    extra:
+      fdr: 0.1
+  - label: SRX885702
+    algorithm: spp
+    ip:
+    - SRX885702
+    control:
+    - SRX885703
+    extra:
+      fdr: 0.1
+  - label: SRX018632
+    algorithm: spp
+    ip:
+    - SRX018632
+    control:
+    - SRX018628
+    extra:
+      fdr: 0.1
+  - label: ERX402138
+    algorithm: spp
+    ip:
+    - ERX402138
+    control:
+    - ERX402113
+    extra:
+      fdr: 0.1
+  - label: SRX359797
+    algorithm: spp
+    ip:
+    - SRX359797
+    control:
+    - SRX359796
+    extra:
+      fdr: 0.1
+  - label: SRX359798
+    algorithm: spp
+    ip:
+    - SRX359798
+    control:
+    - SRX359796
+    extra:
+      fdr: 0.1
+  - label: SRX2055944
+    algorithm: spp
+    ip:
+    - SRX2055944
+    control:
+    - SRX2055946
+    extra:
+      fdr: 0.1
+  - label: SRX330269
+    algorithm: spp
+    ip:
+    - SRX330269
+    control:
+    - SRX330271
+    extra:
+      fdr: 0.1
+  - label: SRX2055964
+    algorithm: spp
+    ip:
+    - SRX2055964
+    control:
+    - SRX2055965
+    extra:
+      fdr: 0.1
+  - label: SRX1179572
+    algorithm: spp
+    ip:
+    - SRX1179572
+    control:
+    - SRX1179571
+    extra:
+      fdr: 0.1
+  - label: SRX018630
+    algorithm: spp
+    ip:
+    - SRX018630
+    control:
+    - SRX018628
+    extra:
+      fdr: 0.1
+  - label: ERX1403350
+    algorithm: spp
+    ip:
+    - ERX1403350
+    control:
+    - ERX1403349
+    extra:
+      fdr: 0.1
+  - label: SRX1433397
+    algorithm: spp
+    ip:
+    - SRX1433397
+    control:
+    - SRX1433391
+    extra:
+      fdr: 0.1
+  - label: SRX495789
+    algorithm: spp
+    ip:
+    - SRX495789
+    control:
+    - SRX495788
+    extra:
+      fdr: 0.1
+  - label: SRX2055953
+    algorithm: spp
+    ip:
+    - SRX2055953
+    control:
+    - SRX2055954
+    extra:
+      fdr: 0.1
+  - label: SRX306193
+    algorithm: spp
+    ip:
+    - SRX306193
+    control:
+    - SRX306195
+    extra:
+      fdr: 0.1
+  - label: ERX402114
+    algorithm: spp
+    ip:
+    - ERX402114
+    control:
+    - ERX402113
+    extra:
+      fdr: 0.1
+  - label: SRX149189
+    algorithm: spp
+    ip:
+    - SRX149189
+    control:
+    - SRX149193
+    extra:
+      fdr: 0.1
+  - label: SRX885700
+    algorithm: spp
+    ip:
+    - SRX885700
+    control:
+    - SRX885701
+    extra:
+      fdr: 0.1
+  - label: ERX402137
+    algorithm: spp
+    ip:
+    - ERX402137
+    control:
+    - ERX402113
+    extra:
+      fdr: 0.1
+  - label: SRX330270
+    algorithm: spp
+    ip:
+    - SRX330270
+    control:
+    - SRX330271
+    extra:
+      fdr: 0.1
+  - label: SRX097620
+    algorithm: spp
+    ip:
+    - SRX097620
+    control:
+    - SRX097621
+    extra:
+      fdr: 0.1
+  - label: SRX149192
+    algorithm: spp
+    ip:
+    - SRX149192
+    control:
+    - SRX149196
+    extra:
+      fdr: 0.1
+  - label: SRX1433400
+    algorithm: spp
+    ip:
+    - SRX1433400
+    control:
+    - SRX1433394
+    extra:
+      fdr: 0.1
+  - label: SRX883605
+    algorithm: spp
+    ip:
+    - SRX883605
+    control:
+    - SRX883601
+    extra:
+      fdr: 0.1
+  - label: SRX326970
+    algorithm: spp
+    ip:
+    - SRX326970
+    control:
+    - SRX326969
+    extra:
+      fdr: 0.1
+  - label: SRX495278
+    algorithm: macs2
+    ip:
+    - SRX495278
+    control:
+    - SRX495276
+    extra: '-g dm --bdg --nomodel --extsize 589'
   - label: SRX495277
     algorithm: macs2
     ip:
@@ -445,13 +452,6 @@ chipseq:
     - SRX495290
     control:
     - SRX495288
-    extra: '-g dm --bdg --nomodel --extsize 589'
-  - label: SRX495278
-    algorithm: macs2
-    ip:
-    - SRX495278
-    control:
-    - SRX495276
     extra: '-g dm --bdg --nomodel --extsize 589'
   - label: SRX495289
     algorithm: macs2

@@ -79,7 +79,7 @@ rule cutadapt:
     log:
         c.patterns['cutadapt'] + '.log'
     params:
-        extra='-a file:../lcdb-wf/include/adapters.fa -q 20 --minimum-length=50'
+        extra='-a file:../lcdb-wf/include/adapters.fa -q 20 --minimum-length=20'
     wrapper:
         wrapper_for('cutadapt')
 
