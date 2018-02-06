@@ -47,6 +47,7 @@ r-knitrbootstrap
 r-pheatmap
 r-readr
 r-rmarkdown
+r-spp
 salmon
 samtools
 scikit-learn
@@ -56,6 +57,8 @@ snakemake
 sra-tools >=2.8
 statsmodels
 subread
+trackhub
+ucsc-bedtobigbed
 ucsc-fetchchromsizes
 ucsc-gtftogenepred
 ucsc-liftover
