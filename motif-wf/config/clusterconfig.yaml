@@ -29,4 +29,4 @@ spp:
   prefix: "--gres=lscratch:20 --time=6:00:00 --mem=16g"
 
 fimo:
-  prefix: "--gres=lscratch:20 --mem=45g"
+  prefix: "--gres=lscratch:20 --time=40:00:00 --mem=25g"
