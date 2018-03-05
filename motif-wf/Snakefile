@@ -14,16 +14,18 @@ from lcdblib.utils import utils
 sys.path.insert(0, '../lcdb-wf')
 from lib import common
 
-sys.path.insert(0, '../lib/python')
+sys.path.insert(0, '../../s2rnai/lib/python')
 from s2rnai import meme
 
 # ----------------------------------------------------------------------------
 # SETUP
 # ----------------------------------------------------------------------------
 
-include: '../lcdb-wf/references.snakefile'
+include: '../lcdb-wf/workflows/references/Snakefile'
 
-shell.prefix('set -euo pipefail; export TMPDIR={};'.format(common.tempdir_for_biowulf()))
+tmpdir = common.tempdir_for_biowulf()
+
+shell.prefix('set -euo pipefail; export TMPDIR={};'.format(tmpdir))
 shell.executable('/bin/bash')
 
 refdict, conversion_kwargs = common.references_dict(config)
@@ -48,10 +50,10 @@ patterns = {
         'gff': 'data/fimo/motif_alignments_{meme}_{ref}.gff',
         'log': 'data/fimo/motif_alignments_{meme}_{ref}.log',
         },
-    'dm6': refdict[assembly][config['gtf']['tag']]['fasta']
+    'dvir': '../data/reference/dvir.fasta'
 }
 
-fill = dict(meme=['flyFactor', 'onTheFly', 'flyReg', 'dmmpmm2009', 'idmmpmm2009'], ref='dm6')
+fill = dict(meme=['flyFactor', 'onTheFly', 'flyReg', 'dmmpmm2009', 'idmmpmm2009'], ref='dvir')
 targets = helpers.fill_patterns(patterns, fill)
 
 rule targets:
@@ -63,8 +65,7 @@ rule download_meme:
     params: url='http://meme-suite.org/meme-software/Databases/motifs/motif_databases.12.15.tgz'
     run:
         from Bio import motifs
-        tmp = NamedTemporaryFile(dir=TMPDIR)
-
+        tmp = NamedTemporaryFile(dir=tmpdir)
         # Download tar
         urlretrieve(url=params.url, filename=tmp.name)
 
@@ -75,12 +76,12 @@ rule download_meme:
                     yield info
 
         with tarfile.open(tmp.name) as tar:
-            tar.extractall(path=TMPDIR, members=fly(tar))
+            tar.extractall(path=tmpdir, members=fly(tar))
 
         # Iterate over outputs and move file to right spot
         for fn in output:
             name = os.path.basename(fn)
-            shell('mv $TMPDIR/motif_databases/FLY/{0} {1}'.format(name, fn))
+            shell('mv {0}/motif_databases/FLY/{1} {2}'.format(tmpdir, name, fn))
 
         # Remove tar file
         tmp.close()
