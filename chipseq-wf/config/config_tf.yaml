@@ -1,7 +1,7 @@
 # sampletable: TSV file defining sample metadata.
 #
 # First column must have header name "samplename".
-sampletable: 'config/sampletable.tsv'
+sampletable: 'config/sampletable_all.tsv'
 
 # sample_dir: directory in which each sample is expected to have its own
 # directory and fastq file[s]. If `sampletable` lists a sample with samplename
@@ -2254,6 +2254,21 @@ chipseq:
     - SRX326966
     control:
     - SRX326968
+    extra:
+      fdr: 0.001
+  - label: SRX330995
+    algorithm: macs2
+    ip:
+    - SRX330995
+    control:
+    - SRX330997
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: SRX330995
+    algorithm: spp
+    ip:
+    - SRX330995
+    control:
+    - SRX330997
     extra:
       fdr: 0.001
 aligner:

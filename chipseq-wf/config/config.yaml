@@ -2,7 +2,7 @@
 # sampletable: TSV file defining sample metadata.
 #
 # First column must have header name "samplename".
-sampletable: 'config/sampletable.tsv'
+sampletable: 'config/sampletable_all.tsv'
 
 # sample_dir: directory in which each sample is expected to have its own
 # directory and fastq file[s]. If `sampletable` lists a sample with samplename
@@ -49,24 +49,21 @@ chipseq:
   # at least a BED file of peaks.
   #
   peak_calling:
-  - label: chip-rep1
+  - label: SRX330995
+    algorithm: macs2
+    ip:
+    - SRX330995
+    control:
+    - SRX330997
+    extra: '-g dm --bdg --nomodel --extsize 147'
+  - label: SRX330995
     algorithm: spp
     ip:
-      - chip-rep1
+    - SRX330995
     control:
-      - input-rep1
+    - SRX330997
     extra:
       fdr: 0.001
-
-  - label: chip-rep2
-    algorithm: spp
-    ip:
-      - chip-rep2
-    control:
-      - input-rep2
-    extra:
-      fdr: 0.001
-
 aligner:
   index: 'bowtie2'
   tag: 'r6-16'

@@ -1,4 +1,10 @@
 samplename	antibody	biological_material	replicate	label	orig_filename
+SRR947207	dsx	s2cell-SRX330995	1	SRX330995	/data/Oliverlab/data/SRA_s2_chip/SRR947207_1.fastq.gz
+SRR947206	dsx	s2cell-SRX330995	1	SRX330995	/data/Oliverlab/data/SRA_s2_chip/SRR947206_1.fastq.gz
+SRR947205	dsx	s2cell-SRX330995	1	SRX330995	/data/Oliverlab/data/SRA_s2_chip/SRR947205_1.fastq.gz
+SRR947204	dsx	s2cell-SRX330995	1	SRX330995	/data/Oliverlab/data/SRA_s2_chip/SRR947204_1.fastq.gz
+SRR947211	input	s2cell-SRX330997	1	SRX330997	/data/Oliverlab/data/SRA_s2_chip/SRR947211_1.fastq.gz
+SRR947212	input	s2cell-SRX330997	1	SRX330997	/data/Oliverlab/data/SRA_s2_chip/SRR947212_1.fastq.gz
 SRR580343	CTCF	s2cell-SRX191915	1	SRX191913	/data/Oliverlab/data/SRA_s2_chip/SRR580343_1.fastq.gz
 SRR580344	CTCF	s2cell-SRX191916	1	SRX191914	/data/Oliverlab/data/SRA_s2_chip/SRR580344_1.fastq.gz
 SRR580345	input	s2cell-SRX191915	1	SRX191915	/data/Oliverlab/data/SRA_s2_chip/SRR580345_1.fastq.gz
